@@ -48,7 +48,7 @@ class Channel
             true
         );
 
-        if ($response['status'] != 200) {
+        if (! in_array($response['status'], [200, 202])) {
             throw CouldNotSendNotification::pusherRespondedWithAnError($response);
         }
 
