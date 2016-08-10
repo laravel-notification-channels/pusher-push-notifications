@@ -1,4 +1,4 @@
-# Pusher push notifications channel for Laravel 5.3
+# Pusher push notifications channel for Laravel 5.3 [WIP]
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/laravel-notification-channels/pusher-push-notifications.svg?style=flat-square)](https://packagist.org/packages/laravel-notification-channels/pusher-push-notifications)
 [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE.md)
@@ -14,14 +14,37 @@ This is where your description should go. Try and limit it to a paragraph or two
 You can install the package via composer:
 
 ``` bash
-composer require LaravelNotificationChannels/pusher-push-notifications
+composer require laravel-notification-channels/pusher-push-notifications
 ```
 
 ## Usage
 
+First you must install the service provider:
+
+```php
+// config/app.php
+'providers' => [
+    ...
+    NotificationChannels\PusherPushNotifications\PusherPushNotificationsServiceProvider::class,
+];
+```
+
+Now you can use the channel in your `via()` method inside the notification as well as send a push notification:
+
 ``` php
-$skeleton = new Skeleton();
-echo $skeleton->echoPhrase('Hello, Spatie!');
+public function via($notifiable)
+{
+    return [NotificationChannels\PusherPushNotifications\Channel::class];
+}
+
+public function toPushNotification($notifiable)
+{
+    return (new Message())
+        ->iOS()
+        ->badge(1)
+        ->sound('success')
+        ->body("Your {$notifiable->service} account was approved!");
+}
 ```
 
 ## Changelog
