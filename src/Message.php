@@ -4,7 +4,7 @@ namespace NotificationChannels\PusherPushNotifications;
 
 use Illuminate\Support\Arr;
 
-class PushNotificationsMessage
+class Message
 {
     /**
      * The device platform (iOS/Android).
@@ -56,8 +56,6 @@ class PushNotificationsMessage
     protected $options = [];
 
     /**
-     * Create a new message instance.
-     *
      * @param string $body
      */
     public function __construct($body = '')
@@ -68,12 +66,13 @@ class PushNotificationsMessage
     /**
      * Set the platform [iOS/Android].
      *
-     * @param  string $value
+     * @param string $value
+     *
      * @return $this
      */
     public function platform($value)
     {
-        if (! in_array($value, ['iOS', 'Android'])) {
+        if (!in_array($value, ['iOS', 'Android'])) {
             throw new \InvalidArgumentException('Invalid platform provided.');
         }
 
@@ -87,7 +86,7 @@ class PushNotificationsMessage
      *
      * @return $this
      */
-    public function ios()
+    public function iOS()
     {
         $this->platform = 'iOS';
 
@@ -109,7 +108,8 @@ class PushNotificationsMessage
     /**
      * Set the message title.
      *
-     * @param  string $value
+     * @param string $value
+     *
      * @return $this
      */
     public function title($value)
@@ -122,7 +122,8 @@ class PushNotificationsMessage
     /**
      * Set the message body.
      *
-     * @param  string $value
+     * @param string $value
+     *
      * @return $this
      */
     public function body($value)
@@ -135,7 +136,8 @@ class PushNotificationsMessage
     /**
      * Set the message sound (Android).
      *
-     * @param  string $value
+     * @param string $value
+     *
      * @return $this
      */
     public function sound($value)
@@ -148,7 +150,8 @@ class PushNotificationsMessage
     /**
      * Set the message icon (Android).
      *
-     * @param  string $value
+     * @param string $value
+     *
      * @return $this
      */
     public function icon($value)
@@ -161,7 +164,8 @@ class PushNotificationsMessage
     /**
      * Set the message badge (iOS).
      *
-     * @param  int $value
+     * @param int $value
+     *
      * @return $this
      */
     public function badge($value)
@@ -174,6 +178,7 @@ class PushNotificationsMessage
     /**
      * @param string $key
      * @param string $value
+     *
      * @return $this
      */
     public function setOption($key, $value)
@@ -190,8 +195,9 @@ class PushNotificationsMessage
      */
     public function toArray()
     {
-        return $this->platform == 'iOS' ?
-            $this->toiOS() : $this->toAndroid();
+        return $this->platform === 'iOS'
+            ? $this->toiOS()
+            : $this->toAndroid();
     }
 
     /**
@@ -209,9 +215,9 @@ class PushNotificationsMessage
                         'body' => $this->body,
                     ],
                     'sound' => $this->sound,
-                    'badge' => $this->badge
+                    'badge' => $this->badge,
                 ],
-            ]
+            ],
         ];
 
         foreach ($this->options as $option => $value) {
@@ -234,9 +240,9 @@ class PushNotificationsMessage
                     'title' => $this->title,
                     'body' => $this->body,
                     'sound' => $this->sound,
-                    'icon' => $this->icon
+                    'icon' => $this->icon,
                 ],
-            ]
+            ],
         ];
 
         foreach ($this->options as $option => $value) {

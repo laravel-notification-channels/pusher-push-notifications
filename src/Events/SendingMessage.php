@@ -4,27 +4,26 @@ namespace NotificationChannels\PusherPushNotifications\Events;
 
 use Illuminate\Notifications\Notification;
 
-class MessageSent
+class SendingMessage
 {
     /**
      * @var
      */
-    private $notifiable;
+    protected $notifiable;
 
     /**
      * @var \Illuminate\Notifications\Notification
      */
-    private $notification;
+    protected $notification;
 
     /**
-     * MessageSending constructor.
-     *
      * @param $notifiable
      * @param \Illuminate\Notifications\Notification $notification
      */
     public function __construct($notifiable, Notification $notification)
     {
         $this->notifiable = $notifiable;
+
         $this->notification = $notification;
     }
 }
