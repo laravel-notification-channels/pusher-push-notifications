@@ -2,6 +2,8 @@
 
 namespace NotificationChannels\PusherPushNotifications;
 
+use NotificationChannels\PusherPushNotifications\Events\MessageSending;
+use NotificationChannels\PusherPushNotifications\Events\MessageSent;
 use Illuminate\Notifications\Notification;
 use Pusher;
 
@@ -37,9 +39,32 @@ class PushNotificationsChannel
      */
     public function send($notifiable, Notification $notification)
     {
+        $interest = $notifiable->routeNotificationFor('PusherPushNotifications')
+            ?: $this->interestName($notifiable);
+
+        if (event(new MessageSending($notifiable, $notification), [], true) === false) {
+            return;
+        }
+
         $this->pusher->notify(
-            $notifiable->routeNotificationFor('PusherPushNotifications'),
+            $interest,
             $notification->toPushNotification($notifiable)->toArray()
         );
+
+        event(
+            new MessageSent($notifiable, $notification)
+        );
+    }
+
+    /**
+     * Get the interest name for the notifiable.
+     *
+     * @return string
+     */
+    protected function interestName($notifiable)
+    {
+        $class = str_replace('\\', '.', get_class($notifiable));
+
+        return $class.'.'.$notifiable->getKey();
     }
 }
