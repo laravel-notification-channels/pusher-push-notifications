@@ -42,7 +42,7 @@ class Message
     protected $icon;
 
     /**
-     * The number to display next to the push notification (iOS).
+     * The number to display next to the app icon (iOS).
      *
      * @var int
      */
@@ -72,7 +72,7 @@ class Message
      */
     public function platform($value)
     {
-        if (!in_array($value, ['iOS', 'Android'])) {
+        if (! in_array($value, ['iOS', 'Android'])) {
             throw new \InvalidArgumentException('Invalid platform provided.');
         }
 
