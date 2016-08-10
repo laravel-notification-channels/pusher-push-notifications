@@ -1,6 +1,13 @@
 {
     "name": "notificationchannels/pusher-push-notifications",
     "description": "Pusher native Push Notifications driver.",
+    "keywords": [
+        "pusher-push-notifications",
+        "laravel",
+        "pusher",
+        "notifications"
+    ],
+    "homepage": "https://github.com/LaravelNotificationChannels/pusher-push-notifications",
     "license": "MIT",
     "authors": [
         {
@@ -12,12 +19,28 @@
     "require": {
         "php": ">=5.6.4",
         "illuminate/notifications": "^5.3@dev",
+        "illuminate/support": "^5.3@dev",
+        "illuminate/events": "^5.3@dev",
         "pusher/pusher-php-server": "2.5.0-rc4"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "5.*"
     },
     "autoload": {
         "psr-4": {
-            "NotificationChannels\\PusherPushNotifications": "src"
+            "NotificationChannels\\PusherPushNotifications\\": "src"
         }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "NotificationChannels\\PusherPushNotifications\\Test\\": "tests"
+        }
+    },
+    "scripts": {
+        "test": "vendor/bin/phpunit"
+    },
+    "config": {
+        "sort-packages": true
     },
     "minimum-stability": "dev"
 }
