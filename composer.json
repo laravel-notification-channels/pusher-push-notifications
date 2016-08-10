@@ -1,0 +1,23 @@
+{
+    "name": "notificationchannels/pusher-push-notifications",
+    "description": "Pusher native Push Notifications driver.",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Mohamed Said",
+            "email": "theMohamedSaid@gmail.com",
+            "homepage": "https://themsaid.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.6.4",
+        "illuminate/notifications": "^5.3@dev",
+        "pusher/pusher-php-server": "2.5.0-rc4"
+    },
+    "autoload": {
+        "psr-4": {
+            "NotificationChannels\\PusherPushNotifications": "src"
+        }
+    },
+    "minimum-stability": "dev"
+}
