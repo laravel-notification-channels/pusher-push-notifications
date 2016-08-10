@@ -1,5 +1,5 @@
 {
-    "name": "notificationchannels/pusher-push-notifications",
+    "name": "laravel-notification-channels/pusher-push-notifications",
     "description": "Pusher native Push Notifications driver.",
     "keywords": [
         "pusher-push-notifications",
