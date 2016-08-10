@@ -29,7 +29,7 @@ echo $skeleton->echoPhrase('Hello, Spatie!');
 Please see [CHANGELOG](CHANGELOG.md) for more information what has changed recently.
 
 ## Testing
-
+    
 ``` bash
 $ composer test
 ```
@@ -45,6 +45,8 @@ If you discover any security related issues, please email theMohamedSaid@gmail.c
 ## Credits
 
 - [Mohamed Said](https://github.com/themsaid)
+- [Marcel Pociot](https://github.com/mpociot)
+- [Freek Van der Herten](https://github.com/freekmurze)
 - [All Contributors](../../contributors)
 
 ## License
