@@ -36,7 +36,7 @@ class Channel
     {
         $interest = $notifiable->routeNotificationFor('PusherPushNotifications') ?: $this->interestName($notifiable);
 
-        $shouldSendMessage = event(new SendingMessage($notifiable, $notification), [], true);
+        $shouldSendMessage = event(new SendingMessage($notifiable, $notification), [], true) !== false;
 
         if (!$shouldSendMessage) {
             return;
