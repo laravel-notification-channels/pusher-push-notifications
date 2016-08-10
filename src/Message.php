@@ -72,7 +72,7 @@ class Message
      */
     public function platform($value)
     {
-        if (! in_array($value, ['iOS', 'Android'])) {
+        if (!in_array($value, ['iOS', 'Android'])) {
             throw new \InvalidArgumentException('Invalid platform provided.');
         }
 

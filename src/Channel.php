@@ -23,7 +23,7 @@ class Channel
     /**
      * Send the given notification.
      *
-     * @param mixed $notifiable
+     * @param mixed                                  $notifiable
      * @param \Illuminate\Notifications\Notification $notification
      *
      * @throws \NotificationChannels\PusherPushNotifications\Exceptions\CouldNotSendNotification
@@ -62,6 +62,6 @@ class Channel
     {
         $class = str_replace('\\', '.', get_class($notifiable));
 
-        return $class . '.' . $notifiable->getKey();
+        return $class.'.'.$notifiable->getKey();
     }
 }
