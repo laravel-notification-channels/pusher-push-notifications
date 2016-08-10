@@ -25,7 +25,7 @@ First you must install the service provider:
 // config/app.php
 'providers' => [
     ...
-    NotificationChannels\PusherPushNotifications\PusherPushNotificationsServiceProvider::class,
+    NotificationChannels\PusherPushNotifications\Provider::class,
 ];
 ```
 
