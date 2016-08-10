@@ -15,24 +15,19 @@ class Channel
      */
     protected $pusher;
 
-    public function __construct()
+    public function __construct(Pusher $pusher)
     {
-        $pusherConfig = config('broadcasting.connections.pusher');
-
-        $this->pusher = new Pusher(
-            $pusherConfig['key'],
-            $pusherConfig['secret'],
-            $pusherConfig['app_id']
-        );
+        $this->pusher = $pusher;
     }
 
     /**
      * Send the given notification.
      *
-     * @param mixed $notifiable
+     * @param mixed                                  $notifiable
      * @param \Illuminate\Notifications\Notification $notification
      *
      * @return void
+     * @throws \NotificationChannels\PusherPushNotifications\Exceptions\CouldNotSendNotification
      */
     public function send($notifiable, Notification $notification)
     {
@@ -40,7 +35,7 @@ class Channel
 
         $shouldSendMessage = event(new SendingMessage($notifiable, $notification), [], true) !== false;
 
-        if (! $shouldSendMessage) {
+        if (!$shouldSendMessage) {
             return;
         }
 
@@ -50,7 +45,7 @@ class Channel
             true
         );
 
-        if (! in_array($response['status'], [200, 202])) {
+        if (!in_array($response['status'], [200, 202])) {
             throw CouldNotSendNotification::pusherRespondedWithAnError($response);
         }
 
