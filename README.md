@@ -32,18 +32,25 @@ First you must install the service provider:
 Now you can use the channel in your `via()` method inside the notification as well as send a push notification:
 
 ``` php
-public function via($notifiable)
-{
-    return [NotificationChannels\PusherPushNotifications\Channel::class];
-}
+use NotificationChannels\PusherPushNotifications\Channel;
+use NotificationChannels\PusherPushNotifications\Message;
+use Illuminate\Notifications\Notification;
 
-public function toPushNotification($notifiable)
+class AccountApproved extends Notification
 {
-    return (new Message())
-        ->iOS()
-        ->badge(1)
-        ->sound('success')
-        ->body("Your {$notifiable->service} account was approved!");
+    public function via($notifiable)
+    {
+        return [NotificationChannels\PusherPushNotifications\Channel::class];
+    }
+
+    public function toPushNotification($notifiable)
+    {
+        return (new Message())
+            ->iOS()
+            ->badge(1)
+            ->sound('success')
+            ->body("Your {$notifiable->service} account was approved!");
+    }
 }
 ```
 
