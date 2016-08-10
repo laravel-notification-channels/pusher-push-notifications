@@ -2,10 +2,10 @@
 
 namespace NotificationChannels\PusherPushNotifications;
 
-use Illuminate\Notifications\Notification;
+use NotificationChannels\PusherPushNotifications\Exceptions\CouldNotSendNotification;
 use NotificationChannels\PusherPushNotifications\Events\MessageWasSent;
 use NotificationChannels\PusherPushNotifications\Events\SendingMessage;
-use NotificationChannels\PusherPushNotifications\Exceptions\CouldNotSendNotification;
+use Illuminate\Notifications\Notification;
 use Pusher;
 
 class Channel
