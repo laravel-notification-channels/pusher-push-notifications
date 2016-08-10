@@ -29,7 +29,7 @@ class Channel
     /**
      * Send the given notification.
      *
-     * @param mixed                                  $notifiable
+     * @param mixed $notifiable
      * @param \Illuminate\Notifications\Notification $notification
      */
     public function send($notifiable, Notification $notification)
@@ -38,7 +38,7 @@ class Channel
 
         $shouldSendMessage = event(new SendingMessage($notifiable, $notification), [], true) !== false;
 
-        if (!$shouldSendMessage) {
+        if (! $shouldSendMessage) {
             return;
         }
 
