@@ -17,9 +17,7 @@ You can install the package via composer:
 composer require laravel-notification-channels/pusher-push-notifications
 ```
 
-## Usage
-
-First you must install the service provider:
+You must install the service provider:
 
 ```php
 // config/app.php
@@ -28,6 +26,8 @@ First you must install the service provider:
     NotificationChannels\PusherPushNotifications\Provider::class,
 ];
 ```
+
+## Usage
 
 Now you can use the channel in your `via()` method inside the notification as well as send a push notification:
 
