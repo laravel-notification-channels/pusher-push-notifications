@@ -5,6 +5,7 @@ namespace NotificationChannels\PusherPushNotifications\Test;
 use Mockery;
 use NotificationChannels\PusherPushNotifications\Channel;
 use PHPUnit_Framework_TestCase;
+use Pusher;
 
 class ChannelTest extends PHPUnit_Framework_TestCase
 {
@@ -25,6 +26,6 @@ class ChannelTest extends PHPUnit_Framework_TestCase
     /** @test */
     public function it_can_send_a_notification()
     {
-        /* TODO: add a test */
+
     }
 }

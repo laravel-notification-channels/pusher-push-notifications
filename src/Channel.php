@@ -15,7 +15,7 @@ class Channel
      */
     protected $pusher;
 
-    public function __construct($pusher)
+    public function __construct(Pusher $pusher)
     {
         $this->pusher = $pusher;
     }
