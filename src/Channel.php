@@ -31,11 +31,10 @@ class Channel
      */
     public function send($notifiable, Notification $notification)
     {
-        $interest = $notifiable->routeNotificationFor('PusherPushNotifications') ?: $this->interestName($notifiable);
+        $interest = $notifiable->routeNotificationFor('PusherPushNotifications')
+            ?: $this->interestName($notifiable);
 
-        $shouldSendMessage = event(new SendingMessage($notifiable, $notification), [], true) !== false;
-
-        if (! $shouldSendMessage) {
+        if (! $this->shouldSendMessage($notifiable, $notification)) {
             return;
         }
 
@@ -64,5 +63,15 @@ class Channel
         $class = str_replace('\\', '.', get_class($notifiable));
 
         return $class.'.'.$notifiable->getKey();
+    }
+
+    /**
+     * Check if we can send the notification.
+     *
+     * @return bool
+     */
+    private function shouldSendMessage($notifiable, $notification)
+    {
+        return event(new SendingMessage($notifiable, $notification), [], true) !== false;
     }
 }

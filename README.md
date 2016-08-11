@@ -55,6 +55,18 @@ class AccountApproved extends Notification
 }
 ```
 
+### Setting up your Pusher account
+
+- Login to https://dashboard.pusher.com/
+- Select your app from the sidebar or create a new app.
+- Click on the "Push Notifications" tab.
+- Upload your APNS Certificate or add your GCM API key.
+- Now select the "App Keys" tab.
+- Copy your `app_id`, `key`, and `secret`.
+- Update the values in your `config/broadcasting.php` file under the pusher connection.
+- You're now good to go.
+
+
 ## Changelog
 
 Please see [CHANGELOG](CHANGELOG.md) for more information what has changed recently.
