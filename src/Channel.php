@@ -23,7 +23,7 @@ class Channel
     /**
      * Send the given notification.
      *
-     * @param mixed                                  $notifiable
+     * @param mixed $notifiable
      * @param \Illuminate\Notifications\Notification $notification
      *
      * @return void
@@ -35,7 +35,7 @@ class Channel
 
         $shouldSendMessage = event(new SendingMessage($notifiable, $notification), [], true) !== false;
 
-        if (!$shouldSendMessage) {
+        if (! $shouldSendMessage) {
             return;
         }
 
@@ -45,7 +45,7 @@ class Channel
             true
         );
 
-        if (!in_array($response['status'], [200, 202])) {
+        if (! in_array($response['status'], [200, 202])) {
             throw CouldNotSendNotification::pusherRespondedWithAnError($response);
         }
 
