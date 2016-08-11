@@ -9,7 +9,7 @@ use PHPUnit_Framework_TestCase;
 
 class MessageTest extends PHPUnit_Framework_TestCase
 {
-    /** @var NotificationChannels\PusherPushNotifications\Message  */
+    /** @var NotificationChannels\PusherPushNotifications\Message */
     protected $message;
 
     public function setUp()
@@ -48,7 +48,7 @@ class MessageTest extends PHPUnit_Framework_TestCase
     /** @test */
     public function it_sets_a_default_sound()
     {
-        $this->assertEquals('default',  Arr::get($this->message->toArray(), 'apns.aps.sound'));
+        $this->assertEquals('default', Arr::get($this->message->toArray(), 'apns.aps.sound'));
     }
 
     /** @test */
