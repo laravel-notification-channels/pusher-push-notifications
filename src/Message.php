@@ -180,7 +180,7 @@ class Message
 
     /**
      * @param string $key
-     * @param string $value
+     * @param mixed $value
      *
      * @return $this
      */

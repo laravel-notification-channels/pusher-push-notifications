@@ -30,7 +30,7 @@ You must install the service provider:
 
 ## Usage
 
-Now you can use the channel in your `via()` method inside the notification as well as send a push notification:
+Now you can use the channel in your `via()` method inside the Notification class.
 
 ``` php
 use NotificationChannels\PusherPushNotifications\Channel;
@@ -66,6 +66,18 @@ class AccountApproved extends Notification
 - Update the values in your `config/broadcasting.php` file under the pusher connection.
 - You're now good to go.
 
+### Available Message methods
+
+- `platform('')`: Accepts a string value of `iOS` or `Android`.
+- `iOS()`: Sets the platform value to iOS.
+- `android()`: Sets the platform value to Android.
+- `title('')`: Accepts a string value for the title.
+- `body('')`: Accepts a string value for the body.
+- `sound('')`: Accepts a string value for the notification sound file. Notice that if you leave blank the default sound value will be `default`.
+- `icon('')`: Accepts a string value for the icon file. (Android Only)
+- `badge(1)`: Accepts an integer value for the badge. (iOS Only)
+- `setOption($key, $value)`: Allows you to set any value in the message payload. For more information [check here for iOS](https://pusher.com/docs/push_notifications/ios/server), [or here for Android](https://pusher.com/docs/push_notifications/android/server).
+
 
 ## Changelog
 
@@ -83,7 +95,7 @@ Please see [CONTRIBUTING](CONTRIBUTING.md) for details.
 
 ## Security
 
-If you discover any security related issues, please email theMohamedSaid@gmail.com instead of using the issue tracker.
+If you discover any security related issues, please email themsaid@gmail.com instead of using the issue tracker.
 
 ## Credits
 
