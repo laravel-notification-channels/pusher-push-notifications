@@ -3,6 +3,7 @@
 namespace NotificationChannels\PusherPushNotifications;
 
 use Illuminate\Support\Arr;
+use NotificationChannels\PusherPushNotifications\Exceptions\CouldNotCreateMessage;
 
 class Message
 {
@@ -66,17 +67,19 @@ class Message
     /**
      * Set the platform [iOS/Android].
      *
-     * @param string $value
+     * @param string $platform
      *
      * @return $this
+     *
+     * @throws \NotificationChannels\PusherPushNotifications\Exceptions\CouldNotCreateMessage
      */
-    public function platform($value)
+    public function platform($platform)
     {
-        if (!in_array($value, ['iOS', 'Android'])) {
-            throw new \InvalidArgumentException('Invalid platform provided.');
+        if (!in_array($platform, ['iOS', 'Android'])) {
+            throw CouldNotCreateMessage::invalidPlatformGiven($platform);
         }
 
-        $this->platform = $value;
+        $this->platform = $platform;
 
         return $this;
     }

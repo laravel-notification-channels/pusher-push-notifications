@@ -2,7 +2,9 @@
 
 namespace NotificationChannels\PusherPushNotifications\Exceptions;
 
-class CouldNotSendNotification extends \Exception
+use Exception;
+
+class CouldNotSendNotification extends Exception
 {
     public static function pusherRespondedWithAnError(array $response)
     {
