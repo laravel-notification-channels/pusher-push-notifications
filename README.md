@@ -41,7 +41,7 @@ class AccountApproved extends Notification
 {
     public function via($notifiable)
     {
-        return [NotificationChannels\PusherPushNotifications\Channel::class];
+        return [Channel::class];
     }
 
     public function toPushNotification($notifiable)
