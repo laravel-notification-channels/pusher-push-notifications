@@ -70,7 +70,7 @@ class Channel
      *
      * @return bool
      */
-    private function shouldSendMessage($notifiable, $notification)
+    protected function shouldSendMessage($notifiable, $notification)
     {
         return event(new SendingMessage($notifiable, $notification), [], true) !== false;
     }
