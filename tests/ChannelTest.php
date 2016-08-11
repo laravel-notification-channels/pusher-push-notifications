@@ -34,7 +34,7 @@ class ChannelTest extends PHPUnit_Framework_TestCase
     /** @test */
     public function it_can_send_a_notification()
     {
-        /** TODO: revisit this test after L5.3 comes out */
+        /* TODO: revisit this test after L5.3 comes out */
 
         //$this->pusher->shouldReceive('notify')->once()->andReturn(['response' => 200]);
 
