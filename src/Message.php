@@ -58,6 +58,16 @@ class Message
 
     /**
      * @param string $body
+     *
+     * @return static
+     */
+    public static function create($body = '')
+    {
+        return new static($body);
+    }
+
+    /**
+     * @param string $body
      */
     public function __construct($body = '')
     {

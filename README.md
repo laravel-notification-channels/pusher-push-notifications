@@ -46,7 +46,7 @@ class AccountApproved extends Notification
 
     public function toPushNotification($notifiable)
     {
-        return (new Message())
+        return Message::create()
             ->iOS()
             ->badge(1)
             ->sound('success')

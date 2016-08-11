@@ -28,6 +28,14 @@ class MessageTest extends PHPUnit_Framework_TestCase
     }
 
     /** @test */
+    public function it_provides_a_create_method()
+    {
+        $message = Message::create('myMessage');
+
+        $this->assertEquals('myMessage', Arr::get($message->toiOS(), 'apns.aps.alert.body'));
+    }
+
+    /** @test */
     public function by_default_it_will_send_a_message_to_ios()
     {
         $this->assertTrue(Arr::has($this->message->toArray(), 'apns'));
