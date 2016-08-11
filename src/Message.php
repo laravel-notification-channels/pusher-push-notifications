@@ -75,7 +75,7 @@ class Message
      */
     public function platform($platform)
     {
-        if (!in_array($platform, ['iOS', 'Android'])) {
+        if (! in_array($platform, ['iOS', 'Android'])) {
             throw CouldNotCreateMessage::invalidPlatformGiven($platform);
         }
 
