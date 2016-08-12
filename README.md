@@ -10,6 +10,20 @@
 
 This package makes it easy to send [Pusher push notifications](https://pusher.com/docs/push_notifications) with Laravel 5.3.
 
+## Contents
+
+- [Installation](#installation)
+	- [Setting up your Pusher account](#setting-up-your-pusher-account)
+- [Usage](#usage)
+	- [Available Message methods](#available-message-methods)
+- [Changelog](#changelog)
+- [Testing](#testing)
+- [Security](#security)
+- [Contributing](#contributing)
+- [Credits](#credits)
+- [License](#license)
+
+
 ## Installation
 
 You can install the package via composer:
