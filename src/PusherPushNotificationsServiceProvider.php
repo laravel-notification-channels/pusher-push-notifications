@@ -5,7 +5,7 @@ namespace NotificationChannels\PusherPushNotifications;
 use Illuminate\Support\ServiceProvider;
 use Pusher;
 
-class Provider extends ServiceProvider
+class PusherPushNotificationsServiceProvider extends ServiceProvider
 {
     /**
      * Bootstrap the application services.
