@@ -24,11 +24,4 @@ class Provider extends ServiceProvider
                 );
             });
     }
-
-    /**
-     * Register the application services.
-     */
-    public function register()
-    {
-    }
 }
