@@ -57,6 +57,13 @@ class PusherMessage
     protected $options = [];
 
     /**
+     * An extra message to the other platform.
+     *
+     * @var
+     */
+    protected $extraMessage;
+
+    /**
      * @param string $body
      *
      * @return static
@@ -116,6 +123,47 @@ class PusherMessage
         $this->platform = 'Android';
 
         return $this;
+    }
+
+    /**
+     * Set an extra message to be sent to Android.
+     *
+     * @param \NotificationChannels\PusherPushNotifications\PusherMessage $message
+     * @return $this
+     */
+    public function withAndroid(PusherMessage $message)
+    {
+        $this->withExtra($message->android());
+
+        return $this;
+    }
+
+    /**
+     * Set an extra message to be sent to iOS.
+     *
+     * @param \NotificationChannels\PusherPushNotifications\PusherMessage $message
+     * @return $this
+     */
+    public function withiOS(PusherMessage $message)
+    {
+        $this->withExtra($message->iOS());
+
+        return $this;
+    }
+
+    /**
+     * Set an extra message to be sent to another platform.
+     *
+     * @param \NotificationChannels\PusherPushNotifications\PusherMessage $message
+     * @return void
+     */
+    private function withExtra(PusherMessage $message)
+    {
+        if ($message->getPlatform() == $this->platform) {
+            throw CouldNotCreateMessage::platformConflict($this->platform);
+        }
+
+        $this->extraMessage = $message;
     }
 
     /**
@@ -229,13 +277,11 @@ class PusherMessage
                     ],
                     'sound' => $this->sound,
                     'badge' => $this->badge,
-                ],
-            ],
+                ]
+            ]
         ];
 
-        foreach ($this->options as $option => $value) {
-            Arr::set($message, $option, $value);
-        }
+        $this->formatMessage($message);
 
         return $message;
     }
@@ -258,10 +304,34 @@ class PusherMessage
             ],
         ];
 
+        $this->formatMessage($message);
+
+        return $message;
+    }
+
+    /**
+     * Return the current platform.
+     *
+     * @return string
+     */
+    public function getPlatform()
+    {
+        return $this->platform;
+    }
+
+    /**
+     * Format the final Payload.
+     *
+     * @param $message
+     */
+    private function formatMessage(&$message)
+    {
+        if ($this->extraMessage) {
+            $message = array_merge($message, $this->extraMessage->toArray());
+        }
+
         foreach ($this->options as $option => $value) {
             Arr::set($message, $option, $value);
         }
-
-        return $message;
     }
 }

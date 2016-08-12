@@ -94,6 +94,30 @@ class AccountApproved extends Notification
 - `badge(1)`: Accepts an integer value for the badge. (iOS Only)
 - `setOption($key, $value)`: Allows you to set any value in the message payload. For more information [check here for iOS](https://pusher.com/docs/push_notifications/ios/server), [or here for Android](https://pusher.com/docs/push_notifications/android/server).
 
+### Sending to multiple platforms
+
+You can send a single message to an iOS device and an Android device at the same time using the `withiOS()` and `withAndroid()` method:
+
+```php
+public function toPushNotification($notifiable)
+{
+    $message = "Your {$notifiable->service} account was approved!";
+
+    return PusherMessage::create()
+        ->iOS()
+        ->badge(1)
+        ->body($message)
+        ->withAndroid(
+            PusherMessage::create()
+                ->title($message)
+                ->icon('icon')
+        );
+}
+```
+
+> - Notice that iOS is the default platform, which means you don't have to call `->iOS()`.
+> - When using `withAndroid()` or `withiOS()` you don't have to define the platform, it's done behind the scenes for you.
+
 ### Routing a message
 
 By default the pusher "interest" messages will be sent to will be defined using the {notifiable}.{id} convention, for example `App.User.1`, however you can change this behaviour by including a `routeNotificationForPusherPushNotifications()` in the notifiable class method that returns the interest name.
