@@ -28,6 +28,19 @@ You must install the service provider:
 ];
 ```
 
+### Setting up your Pusher account
+
+Before using this package you should set up a Pusher account. Here are the steps required.
+
+- Login to https://dashboard.pusher.com/
+- Select your app from the sidebar or create a new app.
+- Click on the "Push Notifications" tab.
+- Upload your APNS Certificate or add your GCM API key.
+- Now select the "App Keys" tab.
+- Copy your `app_id`, `key`, and `secret`.
+- Update the values in your `config/broadcasting.php` file under the pusher connection.
+- You're now good to go.
+
 ## Usage
 
 Now you can use the channel in your `via()` method inside the Notification class.
@@ -55,17 +68,6 @@ class AccountApproved extends Notification
 }
 ```
 
-### Setting up your Pusher account
-
-- Login to https://dashboard.pusher.com/
-- Select your app from the sidebar or create a new app.
-- Click on the "Push Notifications" tab.
-- Upload your APNS Certificate or add your GCM API key.
-- Now select the "App Keys" tab.
-- Copy your `app_id`, `key`, and `secret`.
-- Update the values in your `config/broadcasting.php` file under the pusher connection.
-- You're now good to go.
-
 ### Available Message methods
 
 - `platform('')`: Accepts a string value of `iOS` or `Android`.
@@ -77,7 +79,6 @@ class AccountApproved extends Notification
 - `icon('')`: Accepts a string value for the icon file. (Android Only)
 - `badge(1)`: Accepts an integer value for the badge. (iOS Only)
 - `setOption($key, $value)`: Allows you to set any value in the message payload. For more information [check here for iOS](https://pusher.com/docs/push_notifications/ios/server), [or here for Android](https://pusher.com/docs/push_notifications/android/server).
-
 
 ## Changelog
 
