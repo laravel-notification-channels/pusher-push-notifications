@@ -10,11 +10,12 @@ use Pusher;
 
 class Channel
 {
-    /**
-     * @var Pusher
-     */
+    /** @var Pusher */
     protected $pusher;
 
+    /**
+     * @param \Pusher $pusher
+     */
     public function __construct(Pusher $pusher)
     {
         $this->pusher = $pusher;

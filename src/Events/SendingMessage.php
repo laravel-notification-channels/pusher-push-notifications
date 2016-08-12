@@ -6,18 +6,14 @@ use Illuminate\Notifications\Notification;
 
 class SendingMessage
 {
-    /**
-     * @var
-     */
+    /** @var mixed */
     protected $notifiable;
 
-    /**
-     * @var \Illuminate\Notifications\Notification
-     */
+    /** @var \Illuminate\Notifications\Notification */
     protected $notification;
 
     /**
-     * @param $notifiable
+     * @param mixed $notifiable
      * @param \Illuminate\Notifications\Notification $notification
      */
     public function __construct($notifiable, Notification $notification)

@@ -50,7 +50,7 @@ class Message
     protected $badge;
 
     /**
-     * Options.
+     * Extra options that will get added to the message.
      *
      * @var array
      */
