@@ -8,7 +8,7 @@ use NotificationChannels\PusherPushNotifications\Events\SendingMessage;
 use Illuminate\Notifications\Notification;
 use Pusher;
 
-class Channel
+class PusherChannel
 {
     /** @var Pusher */
     protected $pusher;

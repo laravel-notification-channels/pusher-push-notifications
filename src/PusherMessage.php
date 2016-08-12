@@ -5,7 +5,7 @@ namespace NotificationChannels\PusherPushNotifications;
 use Illuminate\Support\Arr;
 use NotificationChannels\PusherPushNotifications\Exceptions\CouldNotCreateMessage;
 
-class Message
+class PusherMessage
 {
     /**
      * The device platform (iOS/Android).

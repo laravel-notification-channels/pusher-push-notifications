@@ -60,20 +60,20 @@ Before using this package you should set up a Pusher account. Here are the steps
 Now you can use the channel in your `via()` method inside the Notification class.
 
 ``` php
-use NotificationChannels\PusherPushNotifications\Channel;
-use NotificationChannels\PusherPushNotifications\Message;
+use NotificationChannels\PusherPushNotifications\PusherChannel;
+use NotificationChannels\PusherPushNotifications\PusherMessage;
 use Illuminate\Notifications\Notification;
 
 class AccountApproved extends Notification
 {
     public function via($notifiable)
     {
-        return [Channel::class];
+        return [PusherChannel::class];
     }
 
     public function toPushNotification($notifiable)
     {
-        return Message::create()
+        return PusherMessage::create()
             ->iOS()
             ->badge(1)
             ->sound('success')

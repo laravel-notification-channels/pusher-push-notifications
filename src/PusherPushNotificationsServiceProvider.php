@@ -12,7 +12,7 @@ class PusherPushNotificationsServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $this->app->when(Channel::class)
+        $this->app->when(PusherChannel::class)
             ->needs(Pusher::class)
             ->give(function () {
                 $pusherConfig = config('broadcasting.connections.pusher');
