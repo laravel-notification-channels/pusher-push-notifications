@@ -277,8 +277,8 @@ class PusherMessage
                     ],
                     'sound' => $this->sound,
                     'badge' => $this->badge,
-                ]
-            ]
+                ],
+            ],
         ];
 
         $this->formatMessage($message);
