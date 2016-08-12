@@ -121,6 +121,7 @@ Please see [CONTRIBUTING](CONTRIBUTING.md) for details.
 - [Mohamed Said](https://github.com/themsaid)
 - [Marcel Pociot](https://github.com/mpociot)
 - [Freek Van der Herten](https://github.com/freekmurze)
+- [Sebastian De Deyne](https://github.com/sebastiandedeyne)
 - [All Contributors](../../contributors)
 
 ## License
