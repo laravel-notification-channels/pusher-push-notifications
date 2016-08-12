@@ -9,7 +9,7 @@ use PHPUnit_Framework_TestCase;
 
 class MessageTest extends PHPUnit_Framework_TestCase
 {
-    /** @var NotificationChannels\PusherPushNotifications\Message */
+    /** @var \NotificationChannels\PusherPushNotifications\Message */
     protected $message;
 
     public function setUp()
