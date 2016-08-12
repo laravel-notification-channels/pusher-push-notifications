@@ -38,7 +38,7 @@ You must install the service provider:
 // config/app.php
 'providers' => [
     ...
-    NotificationChannels\PusherPushNotifications\Provider::class,
+    NotificationChannels\PusherPushNotifications\PusherPushNotificationsServiceProvider::class,
 ];
 ```
 
@@ -60,20 +60,20 @@ Before using this package you should set up a Pusher account. Here are the steps
 Now you can use the channel in your `via()` method inside the Notification class.
 
 ``` php
-use NotificationChannels\PusherPushNotifications\Channel;
-use NotificationChannels\PusherPushNotifications\Message;
+use NotificationChannels\PusherPushNotifications\PusherChannel;
+use NotificationChannels\PusherPushNotifications\PusherMessage;
 use Illuminate\Notifications\Notification;
 
 class AccountApproved extends Notification
 {
     public function via($notifiable)
     {
-        return [Channel::class];
+        return [PusherChannel::class];
     }
 
     public function toPushNotification($notifiable)
     {
-        return Message::create()
+        return PusherMessage::create()
             ->iOS()
             ->badge(1)
             ->sound('success')
@@ -121,6 +121,7 @@ Please see [CONTRIBUTING](CONTRIBUTING.md) for details.
 - [Mohamed Said](https://github.com/themsaid)
 - [Marcel Pociot](https://github.com/mpociot)
 - [Freek Van der Herten](https://github.com/freekmurze)
+- [Sebastian De Deyne](https://github.com/sebastiandedeyne)
 - [All Contributors](../../contributors)
 
 ## License

@@ -5,14 +5,14 @@ namespace NotificationChannels\PusherPushNotifications;
 use Illuminate\Support\ServiceProvider;
 use Pusher;
 
-class Provider extends ServiceProvider
+class PusherPushNotificationsServiceProvider extends ServiceProvider
 {
     /**
      * Bootstrap the application services.
      */
     public function boot()
     {
-        $this->app->when(Channel::class)
+        $this->app->when(PusherChannel::class)
             ->needs(Pusher::class)
             ->give(function () {
                 $pusherConfig = config('broadcasting.connections.pusher');
@@ -23,12 +23,5 @@ class Provider extends ServiceProvider
                     $pusherConfig['app_id']
                 );
             });
-    }
-
-    /**
-     * Register the application services.
-     */
-    public function register()
-    {
     }
 }

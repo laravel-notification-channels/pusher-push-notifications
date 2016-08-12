@@ -8,13 +8,14 @@ use NotificationChannels\PusherPushNotifications\Events\SendingMessage;
 use Illuminate\Notifications\Notification;
 use Pusher;
 
-class Channel
+class PusherChannel
 {
-    /**
-     * @var Pusher
-     */
+    /** @var Pusher */
     protected $pusher;
 
+    /**
+     * @param \Pusher $pusher
+     */
     public function __construct(Pusher $pusher)
     {
         $this->pusher = $pusher;

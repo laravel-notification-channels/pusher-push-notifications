@@ -24,15 +24,20 @@
             "name": "Freek Van der Herten",
             "email": "freek@spatie.be",
             "homepage": "https://spatie.be"
+        },
+        {
+            "name": "Sebastian De Deyne",
+            "email": "sebastian@spatie.be",
+            "homepage": "https://sebastiandedeyne.com"
         }
     ],
     "require": {
         "php": ">=5.6.4",
-        "illuminate/notifications": "^5.3@dev",
-        "illuminate/support": "^5.3@dev",
         "illuminate/events": "^5.3@dev",
+        "illuminate/notifications": "^5.3@dev",
         "illuminate/queue": "^5.3@dev",
-        "pusher/pusher-php-server": "2.5.0-rc4"
+        "illuminate/support": "^5.3@dev",
+        "pusher/pusher-php-server": "^2.4.0"
     },
     "require-dev": {
         "mockery/mockery": "^0.9.5",

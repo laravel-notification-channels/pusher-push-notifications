@@ -4,25 +4,25 @@ namespace NotificationChannels\PusherPushNotifications\Test;
 
 use Illuminate\Support\Arr;
 use NotificationChannels\PusherPushNotifications\Exceptions\CouldNotCreateMessage;
-use NotificationChannels\PusherPushNotifications\Message;
+use NotificationChannels\PusherPushNotifications\PusherMessage;
 use PHPUnit_Framework_TestCase;
 
 class MessageTest extends PHPUnit_Framework_TestCase
 {
-    /** @var NotificationChannels\PusherPushNotifications\Message */
+    /** @var \NotificationChannels\PusherPushNotifications\PusherMessage */
     protected $message;
 
     public function setUp()
     {
         parent::setUp();
 
-        $this->message = new Message();
+        $this->message = new PusherMessage();
     }
 
     /** @test */
     public function it_can_accept_a_message_when_constructing_a_message()
     {
-        $message = new Message('myMessage');
+        $message = new PusherMessage('myMessage');
 
         $this->assertEquals('myMessage', Arr::get($message->toiOS(), 'apns.aps.alert.body'));
     }
@@ -30,7 +30,7 @@ class MessageTest extends PHPUnit_Framework_TestCase
     /** @test */
     public function it_provides_a_create_method()
     {
-        $message = Message::create('myMessage');
+        $message = PusherMessage::create('myMessage');
 
         $this->assertEquals('myMessage', Arr::get($message->toiOS(), 'apns.aps.alert.body'));
     }

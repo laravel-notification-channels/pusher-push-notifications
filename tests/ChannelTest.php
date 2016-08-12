@@ -2,9 +2,8 @@
 
 namespace NotificationChannels\PusherPushNotifications\Test;
 
-use Illuminate\Notifications\Notification;
 use Mockery;
-use NotificationChannels\PusherPushNotifications\Channel;
+use NotificationChannels\PusherPushNotifications\PusherChannel;
 use PHPUnit_Framework_TestCase;
 use Pusher;
 
@@ -13,15 +12,14 @@ class ChannelTest extends PHPUnit_Framework_TestCase
     /** @var Mockery\Mock */
     protected $pusher;
 
-    /** @var \NotificationChannels\PusherPushNotifications\Channel */
+    /** @var \NotificationChannels\PusherPushNotifications\PusherChannel */
     protected $channel;
 
-    /** @test */
     public function setUp()
     {
         $this->pusher = Mockery::mock(Pusher::class);
 
-        $this->channel = new Channel($this->pusher);
+        $this->channel = new PusherChannel($this->pusher);
     }
 
     public function tearDown()
