@@ -69,9 +69,12 @@ class PusherChannel
     /**
      * Check if we can send the notification.
      *
+     * @param mixed $notifiable
+     * @param \Illuminate\Notifications\Notification $notification
+     * 
      * @return bool
      */
-    protected function shouldSendMessage($notifiable, $notification)
+    protected function shouldSendMessage($notifiable, Notification $notification)
     {
         return event(new SendingMessage($notifiable, $notification), [], true) !== false;
     }
