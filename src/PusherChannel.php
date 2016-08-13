@@ -35,10 +35,6 @@ class PusherChannel
         $interest = $notifiable->routeNotificationFor('PusherPushNotifications')
             ?: $this->interestName($notifiable);
 
-        if (! $this->shouldSendMessage($notifiable, $notification)) {
-            return;
-        }
-
         $response = $this->pusher->notify(
             $interest,
             $notification->toPushNotification($notifiable)->toArray(),
@@ -48,8 +44,6 @@ class PusherChannel
         if (! in_array($response['status'], [200, 202])) {
             throw CouldNotSendNotification::pusherRespondedWithAnError($response);
         }
-
-        event(new MessageWasSent($notifiable, $notification));
     }
 
     /**
@@ -64,15 +58,5 @@ class PusherChannel
         $class = str_replace('\\', '.', get_class($notifiable));
 
         return $class.'.'.$notifiable->getKey();
-    }
-
-    /**
-     * Check if we can send the notification.
-     *
-     * @return bool
-     */
-    protected function shouldSendMessage($notifiable, $notification)
-    {
-        return event(new SendingMessage($notifiable, $notification), [], true) !== false;
     }
 }
