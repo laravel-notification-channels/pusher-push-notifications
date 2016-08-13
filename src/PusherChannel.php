@@ -71,7 +71,7 @@ class PusherChannel
      *
      * @param mixed $notifiable
      * @param \Illuminate\Notifications\Notification $notification
-     * 
+     *
      * @return bool
      */
     protected function shouldSendMessage($notifiable, Notification $notification)
