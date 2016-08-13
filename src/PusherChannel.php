@@ -3,8 +3,6 @@
 namespace NotificationChannels\PusherPushNotifications;
 
 use NotificationChannels\PusherPushNotifications\Exceptions\CouldNotSendNotification;
-use NotificationChannels\PusherPushNotifications\Events\MessageWasSent;
-use NotificationChannels\PusherPushNotifications\Events\SendingMessage;
 use Illuminate\Notifications\Notification;
 use Pusher;
 

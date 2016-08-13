@@ -39,7 +39,7 @@ You must install the service provider:
 'providers' => [
     ...
     NotificationChannels\PusherPushNotifications\PusherPushNotificationsServiceProvider::class,
-];
+],
 ```
 
 ### Setting up your Pusher account
