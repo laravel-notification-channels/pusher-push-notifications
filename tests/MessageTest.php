@@ -39,6 +39,7 @@ class MessageTest extends PHPUnit_Framework_TestCase
     public function by_default_it_will_send_a_message_to_ios()
     {
         $this->assertTrue(Arr::has($this->message->toArray(), 'apns'));
+        $this->assertFalse(Arr::has($this->message->toArray(), 'gcm'));
     }
 
     /** @test */
@@ -47,10 +48,12 @@ class MessageTest extends PHPUnit_Framework_TestCase
         $this->message->ios();
 
         $this->assertTrue(Arr::has($this->message->toArray(), 'apns'));
+        $this->assertFalse(Arr::has($this->message->toArray(), 'gcm'));
 
         $this->message->android();
 
         $this->assertTrue(Arr::has($this->message->toArray(), 'gcm'));
+        $this->assertFalse(Arr::has($this->message->toArray(), 'apns'));
     }
 
     /** @test */
@@ -111,5 +114,14 @@ class MessageTest extends PHPUnit_Framework_TestCase
         $this->setExpectedException(CouldNotCreateMessage::class);
 
         $this->message->platform('bla bla');
+    }
+
+    /** @test */
+    public function it_can_send_message_to_multiple_platforms()
+    {
+        $this->message->ios()->withAndroid(new PusherMessage());
+
+        $this->assertTrue(Arr::has($this->message->toArray(), 'apns'));
+        $this->assertTrue(Arr::has($this->message->toArray(), 'gcm'));
     }
 }
