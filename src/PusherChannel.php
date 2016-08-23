@@ -2,7 +2,7 @@
 
 namespace NotificationChannels\PusherPushNotifications;
 
-use NotificationChannels\PusherPushNotifications\Exceptions\CouldNotSendNotification;
+use Illuminate\Notifications\Events\NotificationFailed;
 use Illuminate\Notifications\Notification;
 use Pusher;
 
@@ -40,7 +40,7 @@ class PusherChannel
         );
 
         if (! in_array($response['status'], [200, 202])) {
-            throw CouldNotSendNotification::pusherRespondedWithAnError($response);
+            event(new NotificationFailed($notifiable, $notification, $response));
         }
     }
 
