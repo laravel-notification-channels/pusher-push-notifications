@@ -2,21 +2,30 @@
 
 namespace NotificationChannels\PusherPushNotifications;
 
-use Illuminate\Notifications\Events\NotificationFailed;
-use Illuminate\Notifications\Notification;
 use Pusher;
+use Illuminate\Events\Dispatcher;
+use Illuminate\Notifications\Notification;
+use Illuminate\Notifications\Events\NotificationFailed;
 
 class PusherChannel
 {
-    /** @var Pusher */
+    /**
+     * @var \Pusher
+     */
     protected $pusher;
+
+    /**
+     * @var \Illuminate\Events\Dispatcher
+     */
+    private $events;
 
     /**
      * @param \Pusher $pusher
      */
-    public function __construct(Pusher $pusher)
+    public function __construct(Pusher $pusher, Dispatcher $events)
     {
         $this->pusher = $pusher;
+        $this->events = $events;
     }
 
     /**
@@ -26,7 +35,6 @@ class PusherChannel
      * @param \Illuminate\Notifications\Notification $notification
      *
      * @return void
-     * @throws \NotificationChannels\PusherPushNotifications\Exceptions\CouldNotSendNotification
      */
     public function send($notifiable, Notification $notification)
     {
@@ -40,7 +48,9 @@ class PusherChannel
         );
 
         if (! in_array($response['status'], [200, 202])) {
-            event(new NotificationFailed($notifiable, $notification, $response));
+            $this->events->fire(
+                new NotificationFailed($notifiable, $notification, $response)
+            );
         }
     }
 
