@@ -37,7 +37,7 @@
         "illuminate/notifications": "5.3.*",
         "illuminate/queue": "5.3.*",
         "illuminate/support": "5.3.*",
-        "pusher/pusher-php-server": "2.5.0-rc4"
+        "pusher/pusher-php-server": "2.6.*"
     },
     "require-dev": {
         "mockery/mockery": "^0.9.5",
