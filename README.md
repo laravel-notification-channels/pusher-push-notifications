@@ -1,4 +1,4 @@
-# Pusher push notifications channel for Laravel 5.3
+# Pusher push notifications channel for Laravel 5.4
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/laravel-notification-channels/pusher-push-notifications.svg?style=flat-square)](https://packagist.org/packages/laravel-notification-channels/pusher-push-notifications)
 [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE.md)
@@ -9,7 +9,7 @@
 [![Code Coverage](https://img.shields.io/scrutinizer/coverage/g/laravel-notification-channels/pusher-push-notifications/master.svg?style=flat-square)](https://scrutinizer-ci.com/g/laravel-notification-channels/pusher-push-notifications/?branch=master)
 [![Total Downloads](https://img.shields.io/packagist/dt/laravel-notification-channels/pusher-push-notifications.svg?style=flat-square)](https://packagist.org/packages/laravel-notification-channels/pusher-push-notifications)
 
-This package makes it easy to send [Pusher push notifications](https://pusher.com/docs/push_notifications) with Laravel 5.3.
+This package makes it easy to send [Pusher push notifications](https://pusher.com/docs/push_notifications) with Laravel 5.4.
 
 ## Contents
 
@@ -30,7 +30,7 @@ This package makes it easy to send [Pusher push notifications](https://pusher.co
 You can install the package via composer:
 
 ``` bash
-composer require laravel-notification-channels/pusher-push-notifications
+composer require dees040/pusher-push-notifications:dev-master
 ```
 
 You must install the service provider:
