@@ -288,13 +288,14 @@ class PusherMessage
 
     /**
      * Format the message for Android.
+     * Changed from GCM to FCM
      *
      * @return array
      */
     public function toAndroid()
     {
         $message = [
-            'gcm' => [
+            'fcm' => [
                 'notification' => [
                     'title' => $this->title,
                     'body' => $this->body,
