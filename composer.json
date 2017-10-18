@@ -1,5 +1,5 @@
 {
-    "name": "dees040/pusher-push-notifications",
+    "name": "pesakitan22/pusher-push-notifications",
     "description": "Pusher native Push Notifications driver.",
     "keywords": [
         "pusher-push-notifications",
@@ -29,6 +29,11 @@
             "name": "Sebastian De Deyne",
             "email": "sebastian@spatie.be",
             "homepage": "https://sebastiandedeyne.com"
+        },
+        {
+            "name": "Deni Putra Perdana",
+            "email": "pesakitan22@about.me",
+            "homepage": "https://about.me/pesakitan22"
         }
     ],
     "require": {
