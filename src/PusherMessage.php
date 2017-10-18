@@ -296,7 +296,7 @@ class PusherMessage
     {
         $message = [
             'fcm' => [
-                'notification' => [
+                'data' => [
                     'title' => $this->title,
                     'body' => $this->body,
                     'sound' => $this->sound,
