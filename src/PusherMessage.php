@@ -261,7 +261,7 @@ class PusherMessage {
 					'sound' => $this->sound,
 					'badge' => $this->badge,
 				],
-				'custom' => $this->options['custom'],
+				'data' => $this->options['custom'],
 			],
 		];
 
