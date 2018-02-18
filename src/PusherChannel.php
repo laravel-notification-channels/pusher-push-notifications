@@ -10,7 +10,7 @@ use Pusher\PushNotifications\PushNotifications;
 class PusherChannel
 {
     /**
-     * @var \Pusher\Pusher
+     * @var \Pusher\PushNotifications\PushNotifications $pusher
      */
     protected $pusher;
 
