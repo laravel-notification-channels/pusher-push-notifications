@@ -9,7 +9,7 @@
 [![Code Coverage](https://img.shields.io/scrutinizer/coverage/g/laravel-notification-channels/pusher-push-notifications/master.svg?style=flat-square)](https://scrutinizer-ci.com/g/laravel-notification-channels/pusher-push-notifications/?branch=master)
 [![Total Downloads](https://img.shields.io/packagist/dt/laravel-notification-channels/pusher-push-notifications.svg?style=flat-square)](https://packagist.org/packages/laravel-notification-channels/pusher-push-notifications)
 
-This package makes it easy to send [Pusher push notifications](https://pusher.com/docs/push_notifications) with Laravel 5.5 and 5.6. If you are using Laravel 5.3 or 5.4, use 1.x branch. Since pusher dropped the support of API key and secret for push notification on new projects created on https://dashboard.pusher.com in favor of new https://dash.pusher.com, this package only support the latest version of pusher push notifications.
+This package makes it easy to send [Pusher push notifications](https://docs.pusher.com/push-notifications) with Laravel 5.5 and 5.6. If you are using Laravel 5.3 or 5.4, use 1.x branch. Since pusher dropped the support of API key and secret for push notification on new projects created on https://dashboard.pusher.com in favor of new https://dash.pusher.com, this package only support the latest version of pusher push notifications.
 
 ## Contents
 
