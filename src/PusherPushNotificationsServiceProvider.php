@@ -3,7 +3,8 @@
 namespace NotificationChannels\PusherPushNotifications;
 
 use Illuminate\Support\ServiceProvider;
-use Pusher;
+use Illuminate\Broadcasting\BroadcastManager;
+use Pusher\PushNotifications\PushNotifications;
 
 class PusherPushNotificationsServiceProvider extends ServiceProvider
 {
@@ -13,15 +14,13 @@ class PusherPushNotificationsServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->app->when(PusherChannel::class)
-            ->needs(Pusher::class)
-            ->give(function () {
-                $pusherConfig = config('broadcasting.connections.pusher');
-
-                return new Pusher(
-                    $pusherConfig['key'],
-                    $pusherConfig['secret'],
-                    $pusherConfig['app_id']
-                );
+            ->needs(PushNotifications::class)
+            ->give(function() {
+                $config = config('broadcasting.connections.pusher');
+                return new PushNotifications([
+                    "instanceId" => $config['push_notification_instance_id'],
+                    "secretKey" => $config['push_notification_secret'],
+                ]);
             });
     }
 }

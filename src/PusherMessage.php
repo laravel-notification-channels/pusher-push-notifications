@@ -156,6 +156,7 @@ class PusherMessage
      *
      * @param \NotificationChannels\PusherPushNotifications\PusherMessage $message
      * @return void
+     * @throws CouldNotCreateMessage
      */
     private function withExtra(PusherMessage $message)
     {
@@ -294,12 +295,12 @@ class PusherMessage
     public function toAndroid()
     {
         $message = [
-            'gcm' => [
+            'fcm' => [
                 'notification' => [
                     'title' => $this->title,
                     'body' => $this->body,
                     'sound' => $this->sound,
-                    'icon' => $this->icon,
+                    'icon' => $this->icon ?: 'icon', // without icon pusher api will return invalid json format error
                 ],
             ],
         ];

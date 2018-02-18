@@ -1,4 +1,4 @@
-# Pusher push notifications channel for Laravel 5.3
+# Pusher push notifications channel for Laravel 5.6
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/laravel-notification-channels/pusher-push-notifications.svg?style=flat-square)](https://packagist.org/packages/laravel-notification-channels/pusher-push-notifications)
 [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE.md)
@@ -9,7 +9,7 @@
 [![Code Coverage](https://img.shields.io/scrutinizer/coverage/g/laravel-notification-channels/pusher-push-notifications/master.svg?style=flat-square)](https://scrutinizer-ci.com/g/laravel-notification-channels/pusher-push-notifications/?branch=master)
 [![Total Downloads](https://img.shields.io/packagist/dt/laravel-notification-channels/pusher-push-notifications.svg?style=flat-square)](https://packagist.org/packages/laravel-notification-channels/pusher-push-notifications)
 
-This package makes it easy to send [Pusher push notifications](https://pusher.com/docs/push_notifications) with Laravel 5.3.
+This package makes it easy to send [Pusher push notifications](https://pusher.com/docs/push_notifications) with Laravel 5.5 and 5.6. If you are using Laravel 5.3 or 5.4, use 1.x branch. Since pusher dropped the support of API key and secret for push notification on new projects created on https://dashboard.pusher.com in favor of new https://dash.pusher.com, this package only support the latest version of pusher push notifications.
 
 ## Contents
 
@@ -33,28 +33,30 @@ You can install the package via composer:
 composer require laravel-notification-channels/pusher-push-notifications
 ```
 
-You must install the service provider:
-
-```php
-// config/app.php
-'providers' => [
-    ...
-    NotificationChannels\PusherPushNotifications\PusherPushNotificationsServiceProvider::class,
-],
-```
-
 ### Setting up your Pusher account
 
 Before using this package you should set up a Pusher account. Here are the steps required.
 
-- Login to https://dashboard.pusher.com/
-- Select your app from the sidebar or create a new app.
-- Click on the "Push Notifications" tab.
+- Login to https://dash.pusher.com/
+- Add a new instance in Push Notifications service.
 - Upload your APNS Certificate or add your GCM API key.
-- Now select the "App Keys" tab.
-- Copy your `app_id`, `key`, and `secret`.
-- Update the values in your `config/broadcasting.php` file under the pusher connection.
+- Now select your instance in left navigation area.
+- Copy your `instance_id`, and `secret`.
+- Update the values in your `config/broadcasting.php` file under the pusher connection with name `push_notification_instance_id` and `push_notification_secret`
 - You're now good to go.
+
+### Config
+
+In `config/broadcasting.php`, it should looks like this
+
+``` php
+    'connections' => [
+        'pusher' => [
+            'push_notification_instance_id' => 'YOUR INSTANCE ID HERE', // Looks like a uuid
+            'push_notification_secret' => "YOUR SECRET HERE", // 31 char string
+        ],
+    ],
+```
 
 ## Usage
 
@@ -99,7 +101,7 @@ class AccountApproved extends Notification
 
 You can send a single message to an iOS device and an Android device at the same time using the `withiOS()` and `withAndroid()` method:
 
-```php
+``` php
 public function toPushNotification($notifiable)
 {
     $message = "Your {$notifiable->service} account was approved!";
@@ -147,6 +149,7 @@ Please see [CONTRIBUTING](CONTRIBUTING.md) for details.
 - [Marcel Pociot](https://github.com/mpociot)
 - [Freek Van der Herten](https://github.com/freekmurze)
 - [Sebastian De Deyne](https://github.com/sebastiandedeyne)
+- [Hanlin Wang](https://github.com/wanghanlin)
 - [All Contributors](../../contributors)
 
 ## License

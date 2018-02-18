@@ -8,15 +8,17 @@ use Illuminate\Notifications\Notifiable;
 use NotificationChannels\PusherPushNotifications\PusherChannel;
 use Illuminate\Notifications\Notification;
 use NotificationChannels\PusherPushNotifications\PusherMessage;
-use PHPUnit_Framework_TestCase;
 use Mockery;
-use Pusher;
+use PHPUnit\Framework\TestCase;
+use Pusher\PushNotifications\PushNotifications;
 
-class ChannelTest extends PHPUnit_Framework_TestCase
+class ChannelTest extends TestCase
 {
+    use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
+
     public function setUp()
     {
-        $this->pusher = Mockery::mock(Pusher::class);
+        $this->pusher = Mockery::mock(PushNotifications::class);
 
         $this->events = Mockery::mock(Dispatcher::class);
 
@@ -41,7 +43,10 @@ class ChannelTest extends PHPUnit_Framework_TestCase
 
         $data = $message->toArray();
 
-        $this->pusher->shouldReceive('notify')->with('interest_name', $data, true)->andReturn(['status' => 202]);
+        $mockResponse = new \stdClass();
+        $mockResponse->publishId = 'fake-id';
+
+        $this->pusher->shouldReceive('publish')->with(['interest_name'], $data)->andReturn($mockResponse);
 
         $this->channel->send($this->notifiable, $this->notification);
     }
@@ -53,7 +58,7 @@ class ChannelTest extends PHPUnit_Framework_TestCase
 
         $data = $message->toArray();
 
-        $this->pusher->shouldReceive('notify')->with('interest_name', $data, true)->andReturn(['status' => 500]);
+        $this->pusher->shouldReceive('publish')->with(['interest_name'], $data)->andThrow(new \Exception);
 
         $this->events->shouldReceive('fire')->with(Mockery::type(NotificationFailed::class));
 
