@@ -3,7 +3,7 @@
 namespace NotificationChannels\PusherPushNotifications;
 
 use Illuminate\Support\ServiceProvider;
-use Pusher;
+use Pusher\Pusher;
 
 class PusherPushNotificationsServiceProvider extends ServiceProvider
 {

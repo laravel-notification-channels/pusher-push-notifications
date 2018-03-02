@@ -10,7 +10,7 @@ use Illuminate\Notifications\Notification;
 use NotificationChannels\PusherPushNotifications\PusherMessage;
 use PHPUnit_Framework_TestCase;
 use Mockery;
-use Pusher;
+use Pusher\Pusher;
 
 class ChannelTest extends PHPUnit_Framework_TestCase
 {
