@@ -2,7 +2,7 @@
 
 namespace NotificationChannels\PusherPushNotifications;
 
-use Pusher;
+use Pusher\Pusher;
 use Illuminate\Events\Dispatcher;
 use Illuminate\Notifications\Notification;
 use Illuminate\Notifications\Events\NotificationFailed;
@@ -10,7 +10,7 @@ use Illuminate\Notifications\Events\NotificationFailed;
 class PusherChannel
 {
     /**
-     * @var \Pusher
+     * @var Pusher
      */
     protected $pusher;
 
@@ -20,7 +20,7 @@ class PusherChannel
     private $events;
 
     /**
-     * @param \Pusher $pusher
+     * @param Pusher $pusher
      */
     public function __construct(Pusher $pusher, Dispatcher $events)
     {
@@ -42,7 +42,7 @@ class PusherChannel
             ?: $this->interestName($notifiable);
 
         $response = $this->pusher->notify(
-            $interest,
+            is_array($interest) ? $interest : [$interest],
             $notification->toPushNotification($notifiable)->toArray(),
             true
         );
