@@ -3,9 +3,9 @@
 namespace NotificationChannels\PusherPushNotifications\Test;
 
 use Illuminate\Support\Arr;
-use NotificationChannels\PusherPushNotifications\Exceptions\CouldNotCreateMessage;
-use NotificationChannels\PusherPushNotifications\PusherMessage;
 use PHPUnit_Framework_TestCase;
+use NotificationChannels\PusherPushNotifications\PusherMessage;
+use NotificationChannels\PusherPushNotifications\Exceptions\CouldNotCreateMessage;
 
 class MessageTest extends PHPUnit_Framework_TestCase
 {

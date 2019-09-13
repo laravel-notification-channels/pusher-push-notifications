@@ -131,7 +131,7 @@ class PusherMessage
      * @param \NotificationChannels\PusherPushNotifications\PusherMessage $message
      * @return $this
      */
-    public function withAndroid(PusherMessage $message)
+    public function withAndroid(self $message)
     {
         $this->withExtra($message->android());
 
@@ -144,7 +144,7 @@ class PusherMessage
      * @param \NotificationChannels\PusherPushNotifications\PusherMessage $message
      * @return $this
      */
-    public function withiOS(PusherMessage $message)
+    public function withiOS(self $message)
     {
         $this->withExtra($message->iOS());
 
@@ -157,7 +157,7 @@ class PusherMessage
      * @param \NotificationChannels\PusherPushNotifications\PusherMessage $message
      * @return void
      */
-    private function withExtra(PusherMessage $message)
+    private function withExtra(self $message)
     {
         if ($message->getPlatform() == $this->platform) {
             throw CouldNotCreateMessage::platformConflict($this->platform);
