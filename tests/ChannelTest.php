@@ -2,15 +2,15 @@
 
 namespace NotificationChannels\PusherPushNotifications\Test;
 
-use Illuminate\Events\Dispatcher;
-use Illuminate\Notifications\Events\NotificationFailed;
-use Illuminate\Notifications\Notifiable;
-use NotificationChannels\PusherPushNotifications\PusherChannel;
-use Illuminate\Notifications\Notification;
-use NotificationChannels\PusherPushNotifications\PusherMessage;
-use PHPUnit_Framework_TestCase;
 use Mockery;
-use Pusher;
+use Pusher\Pusher;
+use PHPUnit_Framework_TestCase;
+use Illuminate\Events\Dispatcher;
+use Illuminate\Notifications\Notifiable;
+use Illuminate\Notifications\Notification;
+use Illuminate\Notifications\Events\NotificationFailed;
+use NotificationChannels\PusherPushNotifications\PusherChannel;
+use NotificationChannels\PusherPushNotifications\PusherMessage;
 
 class ChannelTest extends PHPUnit_Framework_TestCase
 {
