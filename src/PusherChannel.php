@@ -48,7 +48,7 @@ class PusherChannel
         );
 
         if (! in_array($response['status'], [200, 202])) {
-            $this->events->fire(
+            $this->events->dispatch(
                 new NotificationFailed($notifiable, $notification, 'pusher-push-notifications', $response)
             );
         }
