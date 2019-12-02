@@ -2,10 +2,10 @@
 
 namespace NotificationChannels\PusherPushNotifications;
 
-use Pusher\Pusher;
 use Illuminate\Events\Dispatcher;
-use Illuminate\Notifications\Notification;
 use Illuminate\Notifications\Events\NotificationFailed;
+use Illuminate\Notifications\Notification;
+use Pusher\Pusher;
 
 class PusherChannel
 {
