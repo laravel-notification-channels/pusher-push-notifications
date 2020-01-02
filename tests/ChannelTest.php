@@ -2,15 +2,15 @@
 
 namespace NotificationChannels\PusherPushNotifications\Test;
 
-use Mockery;
-use Pusher\Pusher;
-use Mockery\Adapter\Phpunit\MockeryTestCase;
 use Illuminate\Events\Dispatcher;
+use Illuminate\Notifications\Events\NotificationFailed;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Notifications\Notification;
-use Illuminate\Notifications\Events\NotificationFailed;
+use Mockery;
+use Mockery\Adapter\Phpunit\MockeryTestCase;
 use NotificationChannels\PusherPushNotifications\PusherChannel;
 use NotificationChannels\PusherPushNotifications\PusherMessage;
+use Pusher\Pusher;
 
 class ChannelTest extends MockeryTestCase
 {

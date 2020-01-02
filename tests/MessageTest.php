@@ -4,8 +4,8 @@ namespace NotificationChannels\PusherPushNotifications\Test;
 
 use Illuminate\Support\Arr;
 use Mockery\Adapter\Phpunit\MockeryTestCase;
-use NotificationChannels\PusherPushNotifications\PusherMessage;
 use NotificationChannels\PusherPushNotifications\Exceptions\CouldNotCreateMessage;
+use NotificationChannels\PusherPushNotifications\PusherMessage;
 
 class MessageTest extends MockeryTestCase
 {
