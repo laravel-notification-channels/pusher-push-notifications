@@ -41,7 +41,7 @@ class ChannelTest extends MockeryTestCase
 
         $data = $message->toArray();
 
-        $this->pusher->shouldReceive('notify')->with('interest_name', $data, true)->andReturn(['status' => 202]);
+        $this->pusher->shouldReceive('notify')->with(['interest_name'], $data, true)->andReturn(['status' => 202]);
 
         $this->channel->send($this->notifiable, $this->notification);
     }
@@ -53,7 +53,7 @@ class ChannelTest extends MockeryTestCase
 
         $data = $message->toArray();
 
-        $this->pusher->shouldReceive('notify')->with('interest_name', $data, true)->andReturn(['status' => 500]);
+        $this->pusher->shouldReceive('notify')->with(['interest_name'], $data, true)->andReturn(['status' => 500]);
 
         $this->events->shouldReceive('fire')->with(Mockery::type(NotificationFailed::class));
 
