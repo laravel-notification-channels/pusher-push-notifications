@@ -39,7 +39,7 @@ class MessageTest extends MockeryTestCase
     public function by_default_it_will_send_a_message_to_ios()
     {
         $this->assertTrue(Arr::has($this->message->toArray(), 'apns'));
-        $this->assertFalse(Arr::has($this->message->toArray(), 'gcm'));
+        $this->assertFalse(Arr::has($this->message->toArray(), 'fcm'));
     }
 
     /** @test */
@@ -48,11 +48,11 @@ class MessageTest extends MockeryTestCase
         $this->message->ios();
 
         $this->assertTrue(Arr::has($this->message->toArray(), 'apns'));
-        $this->assertFalse(Arr::has($this->message->toArray(), 'gcm'));
+        $this->assertFalse(Arr::has($this->message->toArray(), 'fcm'));
 
         $this->message->android();
 
-        $this->assertTrue(Arr::has($this->message->toArray(), 'gcm'));
+        $this->assertTrue(Arr::has($this->message->toArray(), 'fcm'));
         $this->assertFalse(Arr::has($this->message->toArray(), 'apns'));
     }
 
@@ -69,7 +69,7 @@ class MessageTest extends MockeryTestCase
 
         $this->assertEquals('myTitle', Arr::get($this->message->toiOS(), 'apns.aps.alert.title'));
 
-        $this->assertEquals('myTitle', Arr::get($this->message->toAndroid(), 'gcm.notification.title'));
+        $this->assertEquals('myTitle', Arr::get($this->message->toAndroid(), 'fcm.notification.title'));
     }
 
     /** @test */
@@ -79,7 +79,7 @@ class MessageTest extends MockeryTestCase
 
         $this->assertEquals('myBody', Arr::get($this->message->toiOS(), 'apns.aps.alert.body'));
 
-        $this->assertEquals('myBody', Arr::get($this->message->toAndroid(), 'gcm.notification.body'));
+        $this->assertEquals('myBody', Arr::get($this->message->toAndroid(), 'fcm.notification.body'));
     }
 
     /** @test */
@@ -89,7 +89,7 @@ class MessageTest extends MockeryTestCase
 
         $this->assertEquals('mySound', Arr::get($this->message->toiOS(), 'apns.aps.sound'));
 
-        $this->assertEquals('mySound', Arr::get($this->message->toAndroid(), 'gcm.notification.sound'));
+        $this->assertEquals('mySound', Arr::get($this->message->toAndroid(), 'fcm.notification.sound'));
     }
 
     /** @test */
@@ -105,7 +105,7 @@ class MessageTest extends MockeryTestCase
     {
         $this->message->icon('myIcon');
 
-        $this->assertEquals('myIcon', Arr::get($this->message->toAndroid(), 'gcm.notification.icon'));
+        $this->assertEquals('myIcon', Arr::get($this->message->toAndroid(), 'fcm.notification.icon'));
     }
 
     /** @test */
@@ -122,6 +122,6 @@ class MessageTest extends MockeryTestCase
         $this->message->ios()->withAndroid(new PusherMessage());
 
         $this->assertTrue(Arr::has($this->message->toArray(), 'apns'));
-        $this->assertTrue(Arr::has($this->message->toArray(), 'gcm'));
+        $this->assertTrue(Arr::has($this->message->toArray(), 'fcm'));
     }
 }

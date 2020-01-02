@@ -2,25 +2,26 @@
 
 namespace NotificationChannels\PusherPushNotifications\Test;
 
+use Exception;
 use Illuminate\Events\Dispatcher;
 use Illuminate\Notifications\Events\NotificationFailed;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Notifications\Notification;
 use Mockery;
 use Mockery\Adapter\Phpunit\MockeryTestCase;
-use NotificationChannels\PusherPushNotifications\PusherChannel;
+use NotificationChannels\PusherPushNotifications\PusherBeams;
 use NotificationChannels\PusherPushNotifications\PusherMessage;
-use Pusher\Pusher;
+use Pusher\PushNotifications\PushNotifications;
 
-class ChannelTest extends MockeryTestCase
+class BeamsTest extends MockeryTestCase
 {
     public function setUp(): void
     {
-        $this->pusher = Mockery::mock(Pusher::class);
+        $this->pusher = Mockery::mock(PushNotifications::class);
 
         $this->events = Mockery::mock(Dispatcher::class);
 
-        $this->channel = new PusherChannel($this->pusher, $this->events);
+        $this->beams = new PusherBeams($this->pusher, $this->events);
 
         $this->notification = new TestNotification;
 
@@ -34,9 +35,9 @@ class ChannelTest extends MockeryTestCase
 
         $data = $message->toArray();
 
-        $this->pusher->shouldReceive('notify')->with(['interest_name'], $data, true)->andReturn(['status' => 202]);
+        $this->pusher->shouldReceive('publishToInterests')->once()->with(['interest_name'], $data);
 
-        $this->channel->send($this->notifiable, $this->notification);
+        $this->beams->send($this->notifiable, $this->notification);
     }
 
     /** @test */
@@ -46,11 +47,11 @@ class ChannelTest extends MockeryTestCase
 
         $data = $message->toArray();
 
-        $this->pusher->shouldReceive('notify')->with(['interest_name'], $data, true)->andReturn(['status' => 500]);
+        $this->pusher->shouldReceive('publishToInterests')->once()->with(['interest_name'], $data)->andThrow(new Exception('Something happened'));
 
-        $this->events->shouldReceive('fire')->with(Mockery::type(NotificationFailed::class));
+        $this->events->shouldReceive('dispatch')->once()->with(Mockery::type(NotificationFailed::class));
 
-        $this->channel->send($this->notifiable, $this->notification);
+        $this->beams->send($this->notifiable, $this->notification);
     }
 }
 
