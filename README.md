@@ -33,27 +33,24 @@ You can install the package via composer:
 composer require laravel-notification-channels/pusher-push-notifications
 ```
 
-You must install the service provider:
-
-```php
-// config/app.php
-'providers' => [
-    ...
-    NotificationChannels\PusherPushNotifications\PusherPushNotificationsServiceProvider::class,
-],
-```
-
 ### Setting up your Pusher account
 
-Before using this package you should set up a Pusher account. Here are the steps required.
+Before using this package you should set up a Pusher Beams account. Here are the steps required.
 
-- Login to https://dashboard.pusher.com/
-- Select your app from the sidebar or create a new app.
-- Click on the "Push Notifications" tab.
-- Upload your APNS Certificate or add your GCM API key.
-- Now select the "App Keys" tab.
-- Copy your `app_id`, `key`, and `secret`.
-- Update the values in your `config/broadcasting.php` file under the pusher connection.
+- Login to https://dash.pusher.com/
+- Select the "Beams" product.
+- Select your instance from the list or create a new instance.
+- Click on the "Settings" tab.
+- Upload your APNS Certificate and/or add your FCM Server key.
+- Now select the "Credentials" tab.
+- Copy your `Instance Id`, and `Secret Key`.
+- Add a new entry to in your `config/services.php` file:
+  ```php
+  'pusher' => [
+      'beams_instance_id' => 'Your Instance Id',
+      'beams_secret_key' => 'Your Secret Key',
+  ],
+  ```
 - You're now good to go.
 
 ## Usage
@@ -61,7 +58,7 @@ Before using this package you should set up a Pusher account. Here are the steps
 Now you can use the channel in your `via()` method inside the Notification class.
 
 ``` php
-use NotificationChannels\PusherPushNotifications\PusherChannel;
+use NotificationChannels\PusherPushNotifications\PusherBeams;
 use NotificationChannels\PusherPushNotifications\PusherMessage;
 use Illuminate\Notifications\Notification;
 
@@ -69,7 +66,7 @@ class AccountApproved extends Notification
 {
     public function via($notifiable)
     {
-        return [PusherChannel::class];
+        return [PusherBeams::class];
     }
 
     public function toPushNotification($notifiable)
@@ -93,7 +90,7 @@ class AccountApproved extends Notification
 - `sound('')`: Accepts a string value for the notification sound file. Notice that if you leave blank the default sound value will be `default`.
 - `icon('')`: Accepts a string value for the icon file. (Android Only)
 - `badge(1)`: Accepts an integer value for the badge. (iOS Only)
-- `setOption($key, $value)`: Allows you to set any value in the message payload. For more information [check here for iOS](https://pusher.com/docs/push_notifications/ios/server), [or here for Android](https://pusher.com/docs/push_notifications/android/server).
+- `setOption($key, $value)`: Allows you to set any value in the message payload. See the [request body section of the Pusher Beam docs](https://pusher.com/docs/beams/reference/publish-api#request-body) for more information.
 
 ### Sending to multiple platforms
 
