@@ -27,13 +27,6 @@ class ChannelTest extends MockeryTestCase
         $this->notifiable = new TestNotifiable;
     }
 
-    public function tearDown(): void
-    {
-        Mockery::close();
-
-        parent::tearDown();
-    }
-
     /** @test */
     public function it_can_send_a_notification()
     {
