@@ -2,19 +2,19 @@
 
 namespace NotificationChannels\PusherPushNotifications\Test;
 
-use Mockery;
-use Pusher\Pusher;
-use PHPUnit_Framework_TestCase;
 use Illuminate\Events\Dispatcher;
+use Illuminate\Notifications\Events\NotificationFailed;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Notifications\Notification;
-use Illuminate\Notifications\Events\NotificationFailed;
+use Mockery;
+use Mockery\Adapter\Phpunit\MockeryTestCase;
 use NotificationChannels\PusherPushNotifications\PusherChannel;
 use NotificationChannels\PusherPushNotifications\PusherMessage;
+use Pusher\Pusher;
 
-class ChannelTest extends PHPUnit_Framework_TestCase
+class ChannelTest extends MockeryTestCase
 {
-    public function setUp()
+    public function setUp(): void
     {
         $this->pusher = Mockery::mock(Pusher::class);
 
@@ -27,13 +27,6 @@ class ChannelTest extends PHPUnit_Framework_TestCase
         $this->notifiable = new TestNotifiable;
     }
 
-    public function tearDown()
-    {
-        Mockery::close();
-
-        parent::tearDown();
-    }
-
     /** @test */
     public function it_can_send_a_notification()
     {
@@ -41,7 +34,7 @@ class ChannelTest extends PHPUnit_Framework_TestCase
 
         $data = $message->toArray();
 
-        $this->pusher->shouldReceive('notify')->with('interest_name', $data, true)->andReturn(['status' => 202]);
+        $this->pusher->shouldReceive('notify')->with(['interest_name'], $data, true)->andReturn(['status' => 202]);
 
         $this->channel->send($this->notifiable, $this->notification);
     }
@@ -53,7 +46,7 @@ class ChannelTest extends PHPUnit_Framework_TestCase
 
         $data = $message->toArray();
 
-        $this->pusher->shouldReceive('notify')->with('interest_name', $data, true)->andReturn(['status' => 500]);
+        $this->pusher->shouldReceive('notify')->with(['interest_name'], $data, true)->andReturn(['status' => 500]);
 
         $this->events->shouldReceive('fire')->with(Mockery::type(NotificationFailed::class));
 

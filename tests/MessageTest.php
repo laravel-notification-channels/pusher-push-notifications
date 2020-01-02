@@ -3,16 +3,16 @@
 namespace NotificationChannels\PusherPushNotifications\Test;
 
 use Illuminate\Support\Arr;
-use PHPUnit_Framework_TestCase;
-use NotificationChannels\PusherPushNotifications\PusherMessage;
+use Mockery\Adapter\Phpunit\MockeryTestCase;
 use NotificationChannels\PusherPushNotifications\Exceptions\CouldNotCreateMessage;
+use NotificationChannels\PusherPushNotifications\PusherMessage;
 
-class MessageTest extends PHPUnit_Framework_TestCase
+class MessageTest extends MockeryTestCase
 {
     /** @var \NotificationChannels\PusherPushNotifications\PusherMessage */
     protected $message;
 
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
 
@@ -111,7 +111,7 @@ class MessageTest extends PHPUnit_Framework_TestCase
     /** @test */
     public function it_will_throw_an_exception_when_an_unsupported_platform_is_used()
     {
-        $this->setExpectedException(CouldNotCreateMessage::class);
+        $this->expectException(CouldNotCreateMessage::class);
 
         $this->message->platform('bla bla');
     }
