@@ -295,12 +295,12 @@ class PusherMessage
     {
         $message = [
             'fcm' => [
-                'notification' => [
+                'notification' => array_filter([
                     'title' => $this->title,
                     'body' => $this->body,
                     'sound' => $this->sound,
                     'icon' => $this->icon,
-                ],
+                ]),
             ],
         ];
 
