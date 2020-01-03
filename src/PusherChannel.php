@@ -21,7 +21,8 @@ class PusherChannel
     private $events;
 
     /**
-     * @param Pusher $pusher
+     * @param PushNotifications $beamsClient
+     * @param Dispatcher $events
      */
     public function __construct(PushNotifications $beamsClient, Dispatcher $events)
     {
