@@ -1,4 +1,4 @@
-# Pusher push notifications channel for Laravel 5.5+ & 6.0
+# Pusher Beams push notifications channel for Laravel 5.5+ & 6.0
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/laravel-notification-channels/pusher-push-notifications.svg?style=flat-square)](https://packagist.org/packages/laravel-notification-channels/pusher-push-notifications)
 [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE.md)
@@ -9,7 +9,11 @@
 [![Code Coverage](https://img.shields.io/scrutinizer/coverage/g/laravel-notification-channels/pusher-push-notifications/master.svg?style=flat-square)](https://scrutinizer-ci.com/g/laravel-notification-channels/pusher-push-notifications/?branch=master)
 [![Total Downloads](https://img.shields.io/packagist/dt/laravel-notification-channels/pusher-push-notifications.svg?style=flat-square)](https://packagist.org/packages/laravel-notification-channels/pusher-push-notifications)
 
-This package makes it easy to send [Pusher push notifications](https://pusher.com/docs/push_notifications) with Laravel.
+This package makes it easy to send [Pusher Beams push notifications](https://pusher.com/docs/beams) with Laravel.
+
+Please note that this notification channel should not be confused with Pusher Channels.
+
+Also please note that prior to version 2.0, this package integrated with Pusher's beta push notifications service that was part of Pusher Channels. Please see Pusher's [migration guide](https://www.pusher.com/docs/channels/push_notifications/migration-guide) for more information.
 
 ## Contents
 
