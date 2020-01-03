@@ -2,6 +2,7 @@
 
 namespace NotificationChannels\PusherPushNotifications\Test;
 
+use Exception;
 use Illuminate\Events\Dispatcher;
 use Illuminate\Notifications\Events\NotificationFailed;
 use Illuminate\Notifications\Notifiable;
@@ -10,13 +11,13 @@ use Mockery;
 use Mockery\Adapter\Phpunit\MockeryTestCase;
 use NotificationChannels\PusherPushNotifications\PusherChannel;
 use NotificationChannels\PusherPushNotifications\PusherMessage;
-use Pusher\Pusher;
+use Pusher\PushNotifications\PushNotifications;
 
 class ChannelTest extends MockeryTestCase
 {
     public function setUp(): void
     {
-        $this->pusher = Mockery::mock(Pusher::class);
+        $this->pusher = Mockery::mock(PushNotifications::class);
 
         $this->events = Mockery::mock(Dispatcher::class);
 
@@ -34,7 +35,7 @@ class ChannelTest extends MockeryTestCase
 
         $data = $message->toArray();
 
-        $this->pusher->shouldReceive('notify')->with(['interest_name'], $data, true)->andReturn(['status' => 202]);
+        $this->pusher->shouldReceive('publishToInterests')->once()->with(['interest_name'], $data);
 
         $this->channel->send($this->notifiable, $this->notification);
     }
@@ -46,9 +47,9 @@ class ChannelTest extends MockeryTestCase
 
         $data = $message->toArray();
 
-        $this->pusher->shouldReceive('notify')->with(['interest_name'], $data, true)->andReturn(['status' => 500]);
+        $this->pusher->shouldReceive('publishToInterests')->once()->with(['interest_name'], $data)->andThrow(new Exception('Something happened'));
 
-        $this->events->shouldReceive('fire')->with(Mockery::type(NotificationFailed::class));
+        $this->events->shouldReceive('dispatch')->once()->with(Mockery::type(NotificationFailed::class));
 
         $this->channel->send($this->notifiable, $this->notification);
     }
