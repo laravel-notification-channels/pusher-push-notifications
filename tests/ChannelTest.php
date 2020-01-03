@@ -9,11 +9,11 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Notifications\Notification;
 use Mockery;
 use Mockery\Adapter\Phpunit\MockeryTestCase;
-use NotificationChannels\PusherPushNotifications\PusherBeams;
+use NotificationChannels\PusherPushNotifications\PusherChannel;
 use NotificationChannels\PusherPushNotifications\PusherMessage;
 use Pusher\PushNotifications\PushNotifications;
 
-class BeamsTest extends MockeryTestCase
+class ChannelTest extends MockeryTestCase
 {
     public function setUp(): void
     {
@@ -21,7 +21,7 @@ class BeamsTest extends MockeryTestCase
 
         $this->events = Mockery::mock(Dispatcher::class);
 
-        $this->beams = new PusherBeams($this->pusher, $this->events);
+        $this->channel = new PusherChannel($this->pusher, $this->events);
 
         $this->notification = new TestNotification;
 
@@ -37,7 +37,7 @@ class BeamsTest extends MockeryTestCase
 
         $this->pusher->shouldReceive('publishToInterests')->once()->with(['interest_name'], $data);
 
-        $this->beams->send($this->notifiable, $this->notification);
+        $this->channel->send($this->notifiable, $this->notification);
     }
 
     /** @test */
@@ -51,7 +51,7 @@ class BeamsTest extends MockeryTestCase
 
         $this->events->shouldReceive('dispatch')->once()->with(Mockery::type(NotificationFailed::class));
 
-        $this->beams->send($this->notifiable, $this->notification);
+        $this->channel->send($this->notifiable, $this->notification);
     }
 }
 

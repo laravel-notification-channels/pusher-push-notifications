@@ -8,7 +8,7 @@ use Illuminate\Notifications\Notification;
 use Pusher\PushNotifications\PushNotifications;
 use Throwable;
 
-class PusherBeams
+class PusherChannel
 {
     /**
      * @var PushNotifications

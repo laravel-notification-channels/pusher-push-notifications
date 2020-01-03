@@ -62,7 +62,7 @@ Before using this package you should set up a Pusher Beams account. Here are the
 Now you can use the channel in your `via()` method inside the Notification class.
 
 ``` php
-use NotificationChannels\PusherPushNotifications\PusherBeams;
+use NotificationChannels\PusherPushNotifications\PusherChannel;
 use NotificationChannels\PusherPushNotifications\PusherMessage;
 use Illuminate\Notifications\Notification;
 
@@ -70,7 +70,7 @@ class AccountApproved extends Notification
 {
     public function via($notifiable)
     {
-        return [PusherBeams::class];
+        return [PusherChannel::class];
     }
 
     public function toPushNotification($notifiable)
