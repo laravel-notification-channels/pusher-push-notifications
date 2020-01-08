@@ -2,7 +2,7 @@
 
 namespace NotificationChannels\PusherPushNotifications;
 
-use Illuminate\Events\Dispatcher;
+use Illuminate\Contracts\Events\Dispatcher;
 use Illuminate\Notifications\Events\NotificationFailed;
 use Illuminate\Notifications\Notification;
 use Pusher\PushNotifications\PushNotifications;
@@ -16,7 +16,7 @@ class PusherChannel
     protected $beamsClient;
 
     /**
-     * @var \Illuminate\Events\Dispatcher
+     * @var \Illuminate\Contracts\Events\Dispatcher
      */
     private $events;
 
