@@ -1,4 +1,4 @@
-# Pusher Beams push notifications channel for Laravel 5.5+, 6.0 & 7.0
+# Pusher Beams push notifications channel for Laravel 5.5+, 6.x & 7.x 
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/laravel-notification-channels/pusher-push-notifications.svg?style=flat-square)](https://packagist.org/packages/laravel-notification-channels/pusher-push-notifications)
 [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE.md)
