@@ -281,7 +281,7 @@ class PusherMessage
      */
     public function toArray()
     {
-        switch ($this->platform){
+        switch ($this->platform) {
             case 'Android':
                 return $this->toAndroid();
             case 'web':
