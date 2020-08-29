@@ -86,9 +86,10 @@ class AccountApproved extends Notification
 
 ### Available Message methods
 
-- `platform('')`: Accepts a string value of `iOS` or `Android`.
+- `platform('')`: Accepts a string value of `iOS`, `Android` or `web`.
 - `iOS()`: Sets the platform value to iOS.
 - `android()`: Sets the platform value to Android.
+- `web()`: Sets the platform value to web.
 - `title('')`: Accepts a string value for the title.
 - `body('')`: Accepts a string value for the body.
 - `sound('')`: Accepts a string value for the notification sound file. Notice that if you leave blank the default sound value will be `default`.
@@ -118,11 +119,11 @@ public function toPushNotification($notifiable)
 ```
 
 > - Notice that iOS is the default platform, which means you don't have to call `->iOS()`.
-> - When using `withAndroid()` or `withiOS()` you don't have to define the platform, it's done behind the scenes for you.
+> - When using `withAndroid()`, `withiOS()` or `withWeb()` you don't have to define the platform, it's done behind the scenes for you.
 
 ### Routing a message
 
-By default the pusher "interest" messages will be sent to will be defined using the {notifiable}.{id} convention, for example `App.User.1`, however you can change this behaviour by including a `routeNotificationForPusherPushNotifications()` in the notifiable class method that returns the interest name.
+By default, the pusher "interest" messages will be sent to will be defined using the {notifiable}.{id} convention, for example `App.User.1`, however you can change this behaviour by including a `routeNotificationForPusherPushNotifications()` in the notifiable class method that returns the interest name.
 
 ## Changelog
 

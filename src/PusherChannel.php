@@ -5,6 +5,7 @@ namespace NotificationChannels\PusherPushNotifications;
 use Illuminate\Contracts\Events\Dispatcher;
 use Illuminate\Notifications\Events\NotificationFailed;
 use Illuminate\Notifications\Notification;
+use Illuminate\Support\Arr;
 use Pusher\PushNotifications\PushNotifications;
 use Throwable;
 
@@ -45,7 +46,7 @@ class PusherChannel
 
         try {
             $this->beamsClient->publishToInterests(
-                is_array($interest) ? $interest : [$interest],
+                Arr::wrap($interest),
                 $notification->toPushNotification($notifiable)->toArray()
             );
         } catch (Throwable $exception) {
