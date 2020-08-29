@@ -50,6 +50,11 @@ class PusherMessage
     protected $badge;
 
     /**
+     * URL to follow on notification click
+     */
+    protected $link;
+
+    /**
      * Extra options that will get added to the message.
      *
      * @var array
@@ -262,6 +267,20 @@ class PusherMessage
     }
 
     /**
+     * Set the message link.
+     *
+     * @param string $value
+     *
+     * @return $this
+     */
+    public function link($value)
+    {
+        $this->link = $value;
+
+        return $this;
+    }
+
+    /**
      * @param string $key
      * @param mixed $value
      *
@@ -353,6 +372,7 @@ class PusherMessage
                     'body' => $this->body,
                     'sound' => $this->sound,
                     'icon' => $this->icon,
+                    'deep_link' => $this->link,
                 ]),
             ],
         ];
