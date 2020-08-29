@@ -50,7 +50,7 @@ class PusherMessage
     protected $badge;
 
     /**
-     * URL to follow on notification click
+     * URL to follow on notification click.
      */
     protected $link;
 
