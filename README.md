@@ -17,16 +17,21 @@ Also please note that prior to version 2.0, this package integrated with Pusher'
 
 ## Contents
 
-- [Installation](#installation)
-	- [Setting up your Pusher account](#setting-up-your-pusher-account)
-- [Usage](#usage)
-	- [Available Message methods](#available-message-methods)
-- [Changelog](#changelog)
-- [Testing](#testing)
-- [Security](#security)
-- [Contributing](#contributing)
-- [Credits](#credits)
-- [License](#license)
+- [Pusher Beams push notifications channel for Laravel 5.5+, 6.x, 7.x & 8.x](#pusher-beams-push-notifications-channel-for-laravel-55-6x-7x--8x)
+  - [Contents](#contents)
+  - [Installation](#installation)
+    - [Setting up your Pusher account](#setting-up-your-pusher-account)
+  - [Usage](#usage)
+    - [Available Message methods](#available-message-methods)
+    - [Sending to multiple platforms](#sending-to-multiple-platforms)
+    - [Routing a message](#routing-a-message)
+    - [Publish to users](#publish-to-users)
+  - [Changelog](#changelog)
+  - [Testing](#testing)
+  - [Security](#security)
+  - [Contributing](#contributing)
+  - [Credits](#credits)
+  - [License](#license)
 
 
 ## Installation
@@ -124,7 +129,7 @@ public function toPushNotification($notifiable)
 
 ### Routing a message
 
-By default, the pusher "interest" messages will be sent to will be defined using the {notifiable}.{id} convention, for example `App.User.1`, 
+By default, the pusher "interest" messages will be sent to will be defined using the {notifiable}.{id} convention, for example `App.User.1`,
 however you can change this behaviour by including a `routeNotificationFor()` in the notifiable class.
 
 I.e. if you are pushing notification on ``User`` model, you can go to `App\User` class and implement method:
@@ -141,10 +146,21 @@ public function routeNotificationFor($channel)
     return $class.'.'.$this->getKey();
 }
 ```
-     
-     
-     PusherPushNotifications()` in the notifiable class method that 
-returns the interest name.
+
+`PusherPushNotifications()` in the notifiable class method returns the interest name.
+
+### Publish to users
+
+You can publish to users in the same way that you publish to interests but you must add the following variable to the notifiable model:
+
+```
+class Client extends Model
+{
+    use Notifiable;
+
+    public $pushNotificationType = 'users';
+}
+```
 
 ## Changelog
 

@@ -45,7 +45,21 @@ class ChannelTest extends MockeryTestCase
     }
 
     /** @test */
-    public function it_fires_failure_event_on_failure()
+    public function it_can_send_a_notification_to_interests()
+    {
+        $message = $this->notification->toPushNotification($this->notifiableInterests);
+
+        $data = $message->toArray();
+
+        $this->pusher->shouldReceive('publishToInterests')->once()->with([
+            'interest_one', 'interest_two', 'interest_three',
+        ], $data);
+
+        $this->channel->send($this->notifiableInterests, $this->notification);
+    }
+
+    /** @test */
+    public function it_fires_failure_event_on_interest_failure()
     {
         $message = $this->notification->toPushNotification($this->notifiableInterest);
 
@@ -59,18 +73,6 @@ class ChannelTest extends MockeryTestCase
     }
 
     /** @test */
-    public function it_can_send_a_notification_to_interests()
-    {
-        $message = $this->notification->toPushNotification($this->notifiableInterests);
-
-        $data = $message->toArray();
-
-        $this->pusher->shouldReceive('publishToInterests')->once()->with(['interest_one', 'interest_two', 'interest_three'], $data);
-
-        $this->channel->send($this->notifiableInterests, $this->notification);
-    }
-
-    /** @test */
     public function it_can_send_a_notification_to_user()
     {
         $message = $this->notification->toPushNotification($this->notifiableUser);
@@ -78,6 +80,34 @@ class ChannelTest extends MockeryTestCase
         $data = $message->toArray();
 
         $this->pusher->shouldReceive('publishToUsers')->once()->with(['user_1'], $data);
+
+        $this->channel->send($this->notifiableUser, $this->notification);
+    }
+
+    /** @test */
+    public function it_can_send_a_notification_to_users()
+    {
+        $message = $this->notification->toPushNotification($this->notifiableUsers);
+
+        $data = $message->toArray();
+
+        $this->pusher->shouldReceive('publishToUsers')->once()->with([
+            'user_1', 'user_2', 'user_3',
+        ], $data);
+
+        $this->channel->send($this->notifiableUsers, $this->notification);
+    }
+
+    /** @test */
+    public function it_fires_failure_event_on_user_failure()
+    {
+        $message = $this->notification->toPushNotification($this->notifiableUser);
+
+        $data = $message->toArray();
+
+        $this->pusher->shouldReceive('publishToUsers')->once()->with(['user_1'], $data)->andThrow(new Exception('Something happened'));
+
+        $this->events->shouldReceive('dispatch')->once()->with(Mockery::type(NotificationFailed::class));
 
         $this->channel->send($this->notifiableUser, $this->notification);
     }
@@ -123,7 +153,7 @@ class TestNotifiableUsers
 
     public function routeNotificationForPusherPushNotifications()
     {
-        return ['user_1', 'user_2'];
+        return ['user_1', 'user_2', 'user_3'];
     }
 }
 

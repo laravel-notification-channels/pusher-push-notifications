@@ -2,12 +2,13 @@
 
 namespace NotificationChannels\PusherPushNotifications;
 
-use Illuminate\Contracts\Events\Dispatcher;
-use Illuminate\Notifications\Events\NotificationFailed;
-use Illuminate\Notifications\Notification;
-use Illuminate\Support\Arr;
-use Pusher\PushNotifications\PushNotifications;
 use Throwable;
+use Illuminate\Support\Arr;
+use Illuminate\Support\Str;
+use Illuminate\Notifications\Notification;
+use Illuminate\Contracts\Events\Dispatcher;
+use Pusher\PushNotifications\PushNotifications;
+use Illuminate\Notifications\Events\NotificationFailed;
 
 class PusherChannel
 {
@@ -47,7 +48,7 @@ class PusherChannel
             ?: $this->defaultName($notifiable);
 
         try {
-            $this->beamsClient->{'publishTo'.ucfirst($type)}(
+            $this->beamsClient->{'publishTo' . Str::ucfirst($type)}(
                 Arr::wrap($data),
                 $notification->toPushNotification($notifiable)->toArray()
             );
