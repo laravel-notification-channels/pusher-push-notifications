@@ -41,12 +41,14 @@ class PusherChannel
      */
     public function send($notifiable, Notification $notification)
     {
-        $interest = $notifiable->routeNotificationFor('PusherPushNotifications')
-            ?: $this->interestName($notifiable);
+        $type = $notifiable->pushNotificationType ?? 'interests';
+
+        $data = $notifiable->routeNotificationFor('PusherPushNotifications')
+            ?: $this->defaultName($notifiable);
 
         try {
-            $this->beamsClient->publishToInterests(
-                Arr::wrap($interest),
+            $this->beamsClient->{'publishTo'.ucfirst($type)}(
+                Arr::wrap($data),
                 $notification->toPushNotification($notifiable)->toArray()
             );
         } catch (Throwable $exception) {
@@ -57,13 +59,13 @@ class PusherChannel
     }
 
     /**
-     * Get the interest name for the notifiable.
+     * Get the default name for the notifiable.
      *
      * @param $notifiable
      *
      * @return string
      */
-    protected function interestName($notifiable)
+    protected function defaultName($notifiable)
     {
         $class = str_replace('\\', '.', get_class($notifiable));
 
