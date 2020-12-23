@@ -12,6 +12,8 @@ use Throwable;
 
 class PusherChannel
 {
+    const INTERESTS = 'interests';
+    
     /**
      * @var PushNotifications
      */
@@ -42,13 +44,15 @@ class PusherChannel
      */
     public function send($notifiable, Notification $notification)
     {
-        $type = $notifiable->pushNotificationType ?? 'interests';
+        $type = $notifiable->pushNotificationType ?? self::INTERESTS;
 
         $data = $notifiable->routeNotificationFor('PusherPushNotifications')
             ?: $this->defaultName($notifiable);
 
         try {
-            $this->beamsClient->{'publishTo'.Str::ucfirst($type)}(
+            $notificationType = sprintf('publishTo%s', Str::ucfirst($type));
+
+            $this->beamsClient->{$notificationType}(
                 Arr::wrap($data),
                 $notification->toPushNotification($notifiable)->toArray()
             );
