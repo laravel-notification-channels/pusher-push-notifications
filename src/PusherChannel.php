@@ -12,6 +12,7 @@ use Throwable;
 
 class PusherChannel
 {
+    /** @var string */
     const INTERESTS = 'interests';
     
     /**
