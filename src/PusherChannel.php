@@ -16,7 +16,7 @@ class PusherChannel
      * @var string
      */
     const INTERESTS = 'interests';
-    
+
     /**
      * @var PushNotifications
      */
