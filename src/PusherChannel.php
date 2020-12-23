@@ -6,11 +6,17 @@ use Illuminate\Contracts\Events\Dispatcher;
 use Illuminate\Notifications\Events\NotificationFailed;
 use Illuminate\Notifications\Notification;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Str;
 use Pusher\PushNotifications\PushNotifications;
 use Throwable;
 
 class PusherChannel
 {
+    /**
+     * @var string
+     */
+    const INTERESTS = 'interests';
+    
     /**
      * @var PushNotifications
      */
@@ -41,12 +47,16 @@ class PusherChannel
      */
     public function send($notifiable, Notification $notification)
     {
-        $interest = $notifiable->routeNotificationFor('PusherPushNotifications')
-            ?: $this->interestName($notifiable);
+        $type = $notifiable->pushNotificationType ?? self::INTERESTS;
+
+        $data = $notifiable->routeNotificationFor('PusherPushNotifications')
+            ?: $this->defaultName($notifiable);
 
         try {
-            $this->beamsClient->publishToInterests(
-                Arr::wrap($interest),
+            $notificationType = sprintf('publishTo%s', Str::ucfirst($type));
+
+            $this->beamsClient->{$notificationType}(
+                Arr::wrap($data),
                 $notification->toPushNotification($notifiable)->toArray()
             );
         } catch (Throwable $exception) {
@@ -57,13 +67,13 @@ class PusherChannel
     }
 
     /**
-     * Get the interest name for the notifiable.
+     * Get the default name for the notifiable.
      *
      * @param $notifiable
      *
      * @return string
      */
-    protected function interestName($notifiable)
+    protected function defaultName($notifiable)
     {
         $class = str_replace('\\', '.', get_class($notifiable));
 
