@@ -51,7 +51,7 @@ Before using this package you should set up a Pusher Beams account. Here are the
 - Select your instance from the list or create a new instance.
 - Click on the "Settings" tab.
 - Upload your APNS Certificate and/or add your FCM Server key.
-- Now select the "Credentials" tab.
+- Now select the "Keys" tab.
 - Copy your `Instance Id`, and `Secret Key`.
 - Add a new entry to in your `config/services.php` file:
   ```php
