@@ -135,15 +135,9 @@ however you can change this behaviour by including a `routeNotificationFor()` in
 I.e. if you are pushing notification on ``User`` model, you can go to `App\User` class and implement method:
 
 ```
-public function routeNotificationFor($channel)
+public function routeNotificationForPusherPushNotifications($notification)
 {
-    if($channel === 'PusherPushNotifications'){
-        return 'your.custom.interest.string';
-    }
-
-    $class = str_replace('\\', '.', get_class($this));
-
-    return $class.'.'.$this->getKey();
+    return 'your.custom.interest.string';
 }
 ```
 
