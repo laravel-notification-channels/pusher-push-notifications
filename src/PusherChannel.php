@@ -61,7 +61,7 @@ class PusherChannel
             );
         } catch (Throwable $exception) {
             $this->events->dispatch(
-                new NotificationFailed($notifiable, $notification, 'pusher-push-notifications')
+                new NotificationFailed($notifiable, $notification, 'pusher-push-notifications', ['exception' => $exception])
             );
         }
     }
