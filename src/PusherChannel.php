@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace NotificationChannels\PusherPushNotifications;
 
 use Illuminate\Contracts\Events\Dispatcher;
@@ -12,25 +14,12 @@ use Throwable;
 
 class PusherChannel
 {
-    /**
-     * @var string
-     */
-    const INTERESTS = 'interests';
+    public const INTERESTS = 'interests';
 
-    /**
-     * @var PushNotifications
-     */
-    protected $beamsClient;
+    protected PushNotifications $beamsClient;
 
-    /**
-     * @var \Illuminate\Contracts\Events\Dispatcher
-     */
-    private $events;
+    private Dispatcher $events;
 
-    /**
-     * @param PushNotifications $beamsClient
-     * @param Dispatcher $events
-     */
     public function __construct(PushNotifications $beamsClient, Dispatcher $events)
     {
         $this->beamsClient = $beamsClient;
@@ -40,17 +29,16 @@ class PusherChannel
     /**
      * Send the given notification.
      *
-     * @param mixed $notifiable
-     * @param \Illuminate\Notifications\Notification $notification
-     *
+     * @param  mixed  $notifiable
+     * @param  Notification  $notification
      * @return void
      */
-    public function send($notifiable, Notification $notification)
+    public function send($notifiable, Notification $notification): void
     {
         $type = $notifiable->pushNotificationType ?? self::INTERESTS;
 
         $data = $notifiable->routeNotificationFor('PusherPushNotifications')
-            ?: $this->defaultName($notifiable);
+            ?: self::defaultName($notifiable);
 
         try {
             $notificationType = sprintf('publishTo%s', Str::ucfirst($type));
@@ -69,11 +57,10 @@ class PusherChannel
     /**
      * Get the default name for the notifiable.
      *
-     * @param $notifiable
-     *
+     * @param  mixed  $notifiable
      * @return string
      */
-    protected function defaultName($notifiable)
+    public static function defaultName($notifiable): string
     {
         $class = str_replace('\\', '.', get_class($notifiable));
 
