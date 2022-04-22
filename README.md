@@ -84,6 +84,7 @@ class AccountApproved extends Notification
             ->iOS()
             ->badge(1)
             ->sound('success')
+            ->meta(['foo' => 'bar'])
             ->body("Your {$notifiable->service} account was approved!");
     }
 }
@@ -99,6 +100,7 @@ class AccountApproved extends Notification
 - `title('')`: Accepts a string value for the title.
 - `body('')`: Accepts a string value for the body.
 - `sound('')`: Accepts a string value for the notification sound file. Notice that if you leave blank the default sound value will be `default`.
+- `meta([...])`: Accepts an array of custom data to be sent along with the push message. Works for both platforms. See more at [Pusher Beams - Adding metadata to a notification](https://pusher.com/docs/beams/guides/publishing-to-multiple-devices)
 - `icon('')`: Accepts a string value for the icon file. (Android Only)
 - `badge(1)`: Accepts an integer value for the badge. (iOS Only)
 - `setOption($key, $value)`: Allows you to set any value in the message payload. See the [request body section of the Pusher Beam docs](https://pusher.com/docs/beams/reference/publish-api#request-body) for more information.

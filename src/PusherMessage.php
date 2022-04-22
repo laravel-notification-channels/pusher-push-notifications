@@ -62,6 +62,13 @@ class PusherMessage
     protected $options = [];
 
     /**
+     * Meta data that will be passed along with the message.
+     *
+     * @var array
+     */
+    protected $meta = [];
+
+    /**
      * An extra message to the other platform.
      *
      * @var
@@ -267,6 +274,20 @@ class PusherMessage
     }
 
     /**
+     * Set the metadata.
+     *
+     * @param array $meta
+     *
+     * @return $this
+     */
+    public function meta(array $meta)
+    {
+        $this->meta = $meta;
+
+        return $this;
+    }
+
+    /**
      * Set the message link.
      *
      * @param string $value
@@ -330,6 +351,10 @@ class PusherMessage
             ],
         ];
 
+        if ($this->meta) {
+            $message['apns']['data'] = $this->meta;
+        }
+
         $this->formatMessage($message);
 
         return $message;
@@ -352,6 +377,10 @@ class PusherMessage
                 ]),
             ],
         ];
+
+        if ($this->meta) {
+            $message['fcm']['data'] = $this->meta;
+        }
 
         $this->formatMessage($message);
 

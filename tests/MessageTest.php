@@ -124,4 +124,22 @@ class MessageTest extends MockeryTestCase
         $this->assertTrue(Arr::has($this->message->toArray(), 'apns'));
         $this->assertTrue(Arr::has($this->message->toArray(), 'fcm'));
     }
+
+    /** @test */
+    public function it_has_no_meta_by_default()
+    {
+        $this->message;
+        $this->assertFalse(Arr::has($this->message->toArray(), 'apns.data'));
+        $this->assertFalse(Arr::has($this->message->toArray(), 'apns.data'));
+    }
+
+    /** @test */
+    public function it_can_add_meta()
+    {
+        $this->message->meta(['foo' => 'bar']);
+        $this->assertEquals(['foo' => 'bar'], Arr::get($this->message->toArray(), 'apns.data'));
+
+        $this->message->android();
+        $this->assertEquals(['foo' => 'bar'], Arr::get($this->message->toArray(), 'fcm.data'));
+    }
 }
