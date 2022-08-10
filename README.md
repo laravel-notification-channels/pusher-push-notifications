@@ -1,4 +1,4 @@
-# Pusher Beams push notifications channel for Laravel 5.5+, 6.x, 7.x & 8.x
+# Pusher Beams push notifications channel for Laravel 8.x & 9.x
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/laravel-notification-channels/pusher-push-notifications.svg?style=flat-square)](https://packagist.org/packages/laravel-notification-channels/pusher-push-notifications)
 [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE.md)
@@ -17,7 +17,7 @@ Also please note that prior to version 2.0, this package integrated with Pusher'
 
 ## Contents
 
-- [Pusher Beams push notifications channel for Laravel 5.5+, 6.x, 7.x & 8.x](#pusher-beams-push-notifications-channel-for-laravel-55-6x-7x--8x)
+- [Pusher Beams push notifications channel for Laravel 8.x & 9.x](#pusher-beams-push-notifications-channel-for-laravel-55-6x-7x--8x)
   - [Contents](#contents)
   - [Installation](#installation)
     - [Setting up your Pusher account](#setting-up-your-pusher-account)
@@ -38,7 +38,7 @@ Also please note that prior to version 2.0, this package integrated with Pusher'
 
 You can install the package via composer:
 
-``` bash
+```bash
 composer require laravel-notification-channels/pusher-push-notifications
 ```
 
@@ -51,7 +51,7 @@ Before using this package you should set up a Pusher Beams account. Here are the
 - Select your instance from the list or create a new instance.
 - Click on the "Settings" tab.
 - Upload your APNS Certificate and/or add your FCM Server key.
-- Now select the "Credentials" tab.
+- Now select the "Keys" tab.
 - Copy your `Instance Id`, and `Secret Key`.
 - Add a new entry to in your `config/services.php` file:
   ```php
@@ -66,7 +66,7 @@ Before using this package you should set up a Pusher Beams account. Here are the
 
 Now you can use the channel in your `via()` method inside the Notification class.
 
-``` php
+```php
 use NotificationChannels\PusherPushNotifications\PusherChannel;
 use NotificationChannels\PusherPushNotifications\PusherMessage;
 use Illuminate\Notifications\Notification;
@@ -132,18 +132,12 @@ public function toPushNotification($notifiable)
 By default, the pusher "interest" messages will be sent to will be defined using the {notifiable}.{id} convention, for example `App.User.1`,
 however you can change this behaviour by including a `routeNotificationFor()` in the notifiable class.
 
-I.e. if you are pushing notification on ``User`` model, you can go to `App\User` class and implement method:
+I.e. if you are pushing notification on `User` model, you can go to `App\Models\User` class and implement method:
 
-```
-public function routeNotificationFor($channel)
+```php
+public function routeNotificationForPusherPushNotifications($notification): string
 {
-    if($channel === 'PusherPushNotifications'){
-        return 'your.custom.interest.string';
-    }
-
-    $class = str_replace('\\', '.', get_class($this));
-
-    return $class.'.'.$this->getKey();
+    return 'your.custom.interest.string';
 }
 ```
 
@@ -168,7 +162,7 @@ Please see [CHANGELOG](CHANGELOG.md) for more information what has changed recen
 
 ## Testing
 
-``` bash
+```bash
 $ composer test
 ```
 

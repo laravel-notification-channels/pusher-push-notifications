@@ -9,57 +9,38 @@ class PusherMessage
 {
     /**
      * The device platform (iOS/Android).
-     *
-     * @var string
      */
-    protected $platform = 'iOS';
+    protected string $platform = 'iOS';
 
     /**
      * The message title.
-     *
-     * @var string
      */
-    protected $title;
-
-    /**
-     * The message body.
-     *
-     * @var string
-     */
-    protected $body;
+    protected string $title;
 
     /**
      * The phone number the message should be sent from.
-     *
-     * @var string
      */
-    protected $sound = 'default';
+    protected string $sound = 'default';
 
     /**
      * The message icon (Android).
-     *
-     * @var string
      */
-    protected $icon;
+    protected string $icon;
 
     /**
      * The number to display next to the push notification (iOS).
-     *
-     * @var int
      */
-    protected $badge;
+    protected int $badge;
 
     /**
      * URL to follow on notification click.
      */
-    protected $link;
+    protected string $link;
 
     /**
      * Extra options that will get added to the message.
-     *
-     * @var array
      */
-    protected $options = [];
+    protected array $options = [];
 
     /**
      * An extra message to the other platform.
@@ -70,20 +51,19 @@ class PusherMessage
 
     /**
      * @param string $body
-     *
-     * @return static
      */
-    public static function create($body = '')
+    public function __construct(protected string $body = '')
     {
-        return new static($body);
     }
 
     /**
      * @param string $body
+     *
+     * @return static
      */
-    public function __construct($body = '')
+    public static function create(string $body = ''): static
     {
-        $this->body = $body;
+        return new static($body);
     }
 
     /**
@@ -95,7 +75,7 @@ class PusherMessage
      *
      * @throws \NotificationChannels\PusherPushNotifications\Exceptions\CouldNotCreateMessage
      */
-    public function platform($platform)
+    public function platform(string $platform): self
     {
         if (! in_array($platform, ['iOS', 'Android', 'web'])) {
             throw CouldNotCreateMessage::invalidPlatformGiven($platform);
@@ -111,7 +91,7 @@ class PusherMessage
      *
      * @return $this
      */
-    public function iOS()
+    public function iOS(): self
     {
         $this->platform = 'iOS';
 
@@ -123,7 +103,7 @@ class PusherMessage
      *
      * @return $this
      */
-    public function android()
+    public function android(): self
     {
         $this->platform = 'Android';
 
@@ -135,7 +115,7 @@ class PusherMessage
      *
      * @return $this
      */
-    public function web()
+    public function web(): self
     {
         $this->platform = 'web';
 
@@ -147,8 +127,9 @@ class PusherMessage
      *
      * @param \NotificationChannels\PusherPushNotifications\PusherMessage $message
      * @return $this
+     * @throws CouldNotCreateMessage
      */
-    public function withAndroid(self $message)
+    public function withAndroid(self $message): self
     {
         $this->withExtra($message->android());
 
@@ -160,8 +141,9 @@ class PusherMessage
      *
      * @param \NotificationChannels\PusherPushNotifications\PusherMessage $message
      * @return $this
+     * @throws CouldNotCreateMessage
      */
-    public function withiOS(self $message)
+    public function withiOS(self $message): self
     {
         $this->withExtra($message->iOS());
 
@@ -173,8 +155,9 @@ class PusherMessage
      *
      * @param \NotificationChannels\PusherPushNotifications\PusherMessage $message
      * @return $this
+     * @throws CouldNotCreateMessage
      */
-    public function withWeb(self $message)
+    public function withWeb(self $message): self
     {
         $this->withExtra($message->web());
 
@@ -186,10 +169,11 @@ class PusherMessage
      *
      * @param \NotificationChannels\PusherPushNotifications\PusherMessage $message
      * @return void
+     * @throws CouldNotCreateMessage
      */
-    private function withExtra(self $message)
+    private function withExtra(self $message): void
     {
-        if ($message->getPlatform() == $this->platform) {
+        if ($message->getPlatform() === $this->platform) {
             throw CouldNotCreateMessage::platformConflict($this->platform);
         }
 
@@ -203,7 +187,7 @@ class PusherMessage
      *
      * @return $this
      */
-    public function title($value)
+    public function title(string $value): self
     {
         $this->title = $value;
 
@@ -217,7 +201,7 @@ class PusherMessage
      *
      * @return $this
      */
-    public function body($value)
+    public function body(string $value): self
     {
         $this->body = $value;
 
@@ -231,7 +215,7 @@ class PusherMessage
      *
      * @return $this
      */
-    public function sound($value)
+    public function sound(string $value): self
     {
         $this->sound = $value;
 
@@ -245,7 +229,7 @@ class PusherMessage
      *
      * @return $this
      */
-    public function icon($value)
+    public function icon(string $value): self
     {
         $this->icon = $value;
 
@@ -259,9 +243,9 @@ class PusherMessage
      *
      * @return $this
      */
-    public function badge($value)
+    public function badge(int $value): self
     {
-        $this->badge = (int) $value;
+        $this->badge = $value;
 
         return $this;
     }
@@ -273,7 +257,7 @@ class PusherMessage
      *
      * @return $this
      */
-    public function link($value)
+    public function link(string $value): self
     {
         $this->link = $value;
 
@@ -286,7 +270,7 @@ class PusherMessage
      *
      * @return $this
      */
-    public function setOption($key, $value)
+    public function setOption(string $key, mixed $value): self
     {
         $this->options[$key] = $value;
 
@@ -298,16 +282,14 @@ class PusherMessage
      *
      * @return array
      */
-    public function toArray()
+    public function toArray(): array
     {
-        switch ($this->platform) {
-            case 'Android':
-                return $this->toAndroid();
-            case 'web':
-                return $this->toWeb();
-            default:
-                return $this->toiOS();
-        }
+        return match ($this->platform)
+        {
+            'Android' => $this->toAndroid(),
+            'web'     => $this->toWeb(),
+            default   => $this->toiOS(),
+        };
     }
 
     /**
@@ -315,7 +297,7 @@ class PusherMessage
      *
      * @return array
      */
-    public function toiOS()
+    public function toiOS(): array
     {
         $message = [
             'apns' => [
@@ -340,7 +322,7 @@ class PusherMessage
      *
      * @return array
      */
-    public function toAndroid()
+    public function toAndroid(): array
     {
         $message = [
             'fcm' => [
@@ -363,7 +345,7 @@ class PusherMessage
      *
      * @return array
      */
-    public function toWeb()
+    public function toWeb(): array
     {
         $message = [
             'web' => [
@@ -387,7 +369,7 @@ class PusherMessage
      *
      * @return string
      */
-    public function getPlatform()
+    public function getPlatform(): string
     {
         return $this->platform;
     }
@@ -397,7 +379,7 @@ class PusherMessage
      *
      * @param $message
      */
-    private function formatMessage(&$message)
+    private function formatMessage(&$message): void
     {
         if ($this->extraMessage) {
             $message = array_merge($message, $this->extraMessage->toArray());

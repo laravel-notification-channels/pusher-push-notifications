@@ -20,7 +20,7 @@ class MessageTest extends MockeryTestCase
     }
 
     /** @test */
-    public function it_can_accept_a_message_when_constructing_a_message()
+    public function it_can_accept_a_message_when_constructing_a_message(): void
     {
         $message = new PusherMessage('myMessage');
 
@@ -28,7 +28,7 @@ class MessageTest extends MockeryTestCase
     }
 
     /** @test */
-    public function it_provides_a_create_method()
+    public function it_provides_a_create_method(): void
     {
         $message = PusherMessage::create('myMessage');
 
@@ -36,14 +36,14 @@ class MessageTest extends MockeryTestCase
     }
 
     /** @test */
-    public function by_default_it_will_send_a_message_to_ios()
+    public function by_default_it_will_send_a_message_to_ios(): void
     {
         $this->assertTrue(Arr::has($this->message->toArray(), 'apns'));
         $this->assertFalse(Arr::has($this->message->toArray(), 'fcm'));
     }
 
     /** @test */
-    public function it_can_send_a_message_to_the_right_platform()
+    public function it_can_send_a_message_to_the_right_platform(): void
     {
         $this->message->ios();
 
@@ -57,13 +57,13 @@ class MessageTest extends MockeryTestCase
     }
 
     /** @test */
-    public function it_sets_a_default_sound()
+    public function it_sets_a_default_sound(): void
     {
         $this->assertEquals('default', Arr::get($this->message->toArray(), 'apns.aps.sound'));
     }
 
     /** @test */
-    public function it_can_set_the_title()
+    public function it_can_set_the_title(): void
     {
         $this->message->title('myTitle');
 
@@ -73,7 +73,7 @@ class MessageTest extends MockeryTestCase
     }
 
     /** @test */
-    public function it_can_set_the_body()
+    public function it_can_set_the_body(): void
     {
         $this->message->body('myBody');
 
@@ -83,7 +83,7 @@ class MessageTest extends MockeryTestCase
     }
 
     /** @test */
-    public function it_can_set_the_sound()
+    public function it_can_set_the_sound(): void
     {
         $this->message->sound('mySound');
 
@@ -93,7 +93,7 @@ class MessageTest extends MockeryTestCase
     }
 
     /** @test */
-    public function it_can_set_the_badge()
+    public function it_can_set_the_badge(): void
     {
         $this->message->badge(5);
 
@@ -101,7 +101,7 @@ class MessageTest extends MockeryTestCase
     }
 
     /** @test */
-    public function it_can_set_the_icon()
+    public function it_can_set_the_icon(): void
     {
         $this->message->icon('myIcon');
 
@@ -109,7 +109,7 @@ class MessageTest extends MockeryTestCase
     }
 
     /** @test */
-    public function it_will_throw_an_exception_when_an_unsupported_platform_is_used()
+    public function it_will_throw_an_exception_when_an_unsupported_platform_is_used(): void
     {
         $this->expectException(CouldNotCreateMessage::class);
 
@@ -117,7 +117,7 @@ class MessageTest extends MockeryTestCase
     }
 
     /** @test */
-    public function it_can_send_message_to_multiple_platforms()
+    public function it_can_send_message_to_multiple_platforms(): void
     {
         $this->message->ios()->withAndroid(new PusherMessage());
 
