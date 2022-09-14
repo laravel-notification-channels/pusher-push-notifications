@@ -15,7 +15,7 @@ class PusherMessage
     /**
      * The message title.
      */
-    protected string $title;
+    protected string|null $title = null;
 
     /**
      * The phone number the message should be sent from.
@@ -25,17 +25,17 @@ class PusherMessage
     /**
      * The message icon (Android).
      */
-    protected string $icon;
+    protected string|null $icon = null;
 
     /**
      * The number to display next to the push notification (iOS).
      */
-    protected int $badge;
+    protected int|null $badge = null;
 
     /**
      * URL to follow on notification click.
      */
-    protected string $link;
+    protected string|null $link = null;
 
     /**
      * Extra options that will get added to the message.
@@ -47,7 +47,7 @@ class PusherMessage
      *
      * @var
      */
-    protected $extraMessage;
+    protected PusherMessage|null $extraMessage = null;
 
     /**
      * @param string $body

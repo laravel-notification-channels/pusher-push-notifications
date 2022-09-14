@@ -54,7 +54,7 @@ class PusherChannel
      * @param  mixed  $notifiable
      * @return string
      */
-    public static function defaultName($notifiable): string
+    public static function defaultName(mixed $notifiable): string
     {
         $class = str_replace('\\', '.', get_class($notifiable));
 

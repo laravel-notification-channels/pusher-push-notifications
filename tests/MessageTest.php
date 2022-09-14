@@ -10,7 +10,7 @@ use NotificationChannels\PusherPushNotifications\PusherMessage;
 class MessageTest extends MockeryTestCase
 {
     /** @var \NotificationChannels\PusherPushNotifications\PusherMessage */
-    protected $message;
+    protected PusherMessage $message;
 
     public function setUp(): void
     {

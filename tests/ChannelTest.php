@@ -117,7 +117,7 @@ class TestNotifiableInterest
 {
     use Notifiable;
 
-    public function routeNotificationForPusherPushNotifications()
+    public function routeNotificationForPusherPushNotifications(): string
     {
         return 'interest_name';
     }
@@ -127,7 +127,7 @@ class TestNotifiableInterests
 {
     use Notifiable;
 
-    public function routeNotificationForPusherPushNotifications()
+    public function routeNotificationForPusherPushNotifications(): array
     {
         return ['interest_one', 'interest_two', 'interest_three'];
     }
@@ -137,9 +137,9 @@ class TestNotifiableUser
 {
     use Notifiable;
 
-    public $pushNotificationType = 'users';
+    public string $pushNotificationType = 'users';
 
-    public function routeNotificationForPusherPushNotifications()
+    public function routeNotificationForPusherPushNotifications(): string
     {
         return 'user_1';
     }
@@ -149,9 +149,9 @@ class TestNotifiableUsers
 {
     use Notifiable;
 
-    public $pushNotificationType = 'users';
+    public string $pushNotificationType = 'users';
 
-    public function routeNotificationForPusherPushNotifications()
+    public function routeNotificationForPusherPushNotifications(): array
     {
         return ['user_1', 'user_2', 'user_3'];
     }
@@ -159,7 +159,7 @@ class TestNotifiableUsers
 
 class TestNotification extends Notification
 {
-    public function toPushNotification($notifiable)
+    public function toPushNotification($notifiable): PusherMessage
     {
         return new PusherMessage();
     }
