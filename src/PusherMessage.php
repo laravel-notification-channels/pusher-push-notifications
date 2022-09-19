@@ -125,7 +125,7 @@ class PusherMessage
      *
      * @param  \NotificationChannels\PusherPushNotifications\PusherMessage  $message
      * @return $this
-     * 
+     *
      * @throws CouldNotCreateMessage
      */
     public function withAndroid(self $message): self
