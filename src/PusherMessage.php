@@ -50,14 +50,14 @@ class PusherMessage
     protected PusherMessage|null $extraMessage = null;
 
     /**
-     * @param string $body
+     * @param  string  $body
      */
     public function __construct(protected string $body = '')
     {
     }
 
     /**
-     * @param string $body
+     * @param  string  $body
      *
      * @return static
      */
@@ -69,8 +69,7 @@ class PusherMessage
     /**
      * Set the platform [iOS/Android].
      *
-     * @param string $platform
-     *
+     * @param  string  $platform
      * @return $this
      *
      * @throws \NotificationChannels\PusherPushNotifications\Exceptions\CouldNotCreateMessage
@@ -125,7 +124,7 @@ class PusherMessage
     /**
      * Set an extra message to be sent to Android.
      *
-     * @param \NotificationChannels\PusherPushNotifications\PusherMessage $message
+     * @param  \NotificationChannels\PusherPushNotifications\PusherMessage  $message
      * @return $this
      * @throws CouldNotCreateMessage
      */
@@ -139,8 +138,9 @@ class PusherMessage
     /**
      * Set an extra message to be sent to iOS.
      *
-     * @param \NotificationChannels\PusherPushNotifications\PusherMessage $message
+     * @param  \NotificationChannels\PusherPushNotifications\PusherMessage  $message
      * @return $this
+     *
      * @throws CouldNotCreateMessage
      */
     public function withiOS(self $message): self
@@ -153,8 +153,9 @@ class PusherMessage
     /**
      * Set an extra message to be sent to web.
      *
-     * @param \NotificationChannels\PusherPushNotifications\PusherMessage $message
+     * @param  \NotificationChannels\PusherPushNotifications\PusherMessage  $message
      * @return $this
+     *
      * @throws CouldNotCreateMessage
      */
     public function withWeb(self $message): self
@@ -167,8 +168,9 @@ class PusherMessage
     /**
      * Set an extra message to be sent to another platform.
      *
-     * @param \NotificationChannels\PusherPushNotifications\PusherMessage $message
+     * @param  \NotificationChannels\PusherPushNotifications\PusherMessage  $message
      * @return void
+     *
      * @throws CouldNotCreateMessage
      */
     private function withExtra(self $message): void
@@ -183,8 +185,7 @@ class PusherMessage
     /**
      * Set the message title.
      *
-     * @param string $value
-     *
+     * @param  string  $value
      * @return $this
      */
     public function title(string $value): self
@@ -197,8 +198,7 @@ class PusherMessage
     /**
      * Set the message body.
      *
-     * @param string $value
-     *
+     * @param  string  $value
      * @return $this
      */
     public function body(string $value): self
@@ -211,8 +211,7 @@ class PusherMessage
     /**
      * Set the message sound (Android).
      *
-     * @param string $value
-     *
+     * @param  string  $value
      * @return $this
      */
     public function sound(string $value): self
@@ -225,8 +224,7 @@ class PusherMessage
     /**
      * Set the message icon (Android).
      *
-     * @param string $value
-     *
+     * @param  string  $value
      * @return $this
      */
     public function icon(string $value): self
@@ -239,8 +237,7 @@ class PusherMessage
     /**
      * Set the message badge (iOS).
      *
-     * @param int $value
-     *
+     * @param  int  $value
      * @return $this
      */
     public function badge(int $value): self
@@ -253,8 +250,7 @@ class PusherMessage
     /**
      * Set the message link.
      *
-     * @param string $value
-     *
+     * @param  string  $value
      * @return $this
      */
     public function link(string $value): self
@@ -265,9 +261,8 @@ class PusherMessage
     }
 
     /**
-     * @param string $key
-     * @param mixed $value
-     *
+     * @param  string  $key
+     * @param  mixed  $value
      * @return $this
      */
     public function setOption(string $key, mixed $value): self
@@ -284,8 +279,7 @@ class PusherMessage
      */
     public function toArray(): array
     {
-        return match ($this->platform)
-        {
+        return match ($this->platform) {
             'Android' => $this->toAndroid(),
             'web'     => $this->toWeb(),
             default   => $this->toiOS(),

@@ -7,7 +7,7 @@ use Exception;
 class CouldNotCreateMessage extends Exception
 {
     /**
-     * @param string $platform
+     * @param  string  $platform
      * @return static
      */
     public static function invalidPlatformGiven(string $platform): static
@@ -16,7 +16,7 @@ class CouldNotCreateMessage extends Exception
     }
 
     /**
-     * @param string $platform
+     * @param  string  $platform
      * @return static
      */
     public static function platformConflict(string $platform): static
