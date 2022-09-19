@@ -58,7 +58,6 @@ class PusherMessage
 
     /**
      * @param  string  $body
-     *
      * @return static
      */
     public static function create(string $body = ''): static
@@ -126,6 +125,7 @@ class PusherMessage
      *
      * @param  \NotificationChannels\PusherPushNotifications\PusherMessage  $message
      * @return $this
+     * 
      * @throws CouldNotCreateMessage
      */
     public function withAndroid(self $message): self
