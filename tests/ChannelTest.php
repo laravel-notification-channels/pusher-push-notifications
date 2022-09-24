@@ -33,7 +33,7 @@ class ChannelTest extends MockeryTestCase
     }
 
     /** @test */
-    public function it_can_send_a_notification_to_interest()
+    public function it_can_send_a_notification_to_interest(): void
     {
         $message = $this->notification->toPushNotification($this->notifiableInterest);
 
@@ -45,7 +45,7 @@ class ChannelTest extends MockeryTestCase
     }
 
     /** @test */
-    public function it_can_send_a_notification_to_interests()
+    public function it_can_send_a_notification_to_interests(): void
     {
         $message = $this->notification->toPushNotification($this->notifiableInterests);
 
@@ -59,7 +59,7 @@ class ChannelTest extends MockeryTestCase
     }
 
     /** @test */
-    public function it_fires_failure_event_on_interest_failure()
+    public function it_fires_failure_event_on_interest_failure(): void
     {
         $message = $this->notification->toPushNotification($this->notifiableInterest);
 
@@ -73,7 +73,7 @@ class ChannelTest extends MockeryTestCase
     }
 
     /** @test */
-    public function it_can_send_a_notification_to_user()
+    public function it_can_send_a_notification_to_user(): void
     {
         $message = $this->notification->toPushNotification($this->notifiableUser);
 
@@ -85,7 +85,7 @@ class ChannelTest extends MockeryTestCase
     }
 
     /** @test */
-    public function it_can_send_a_notification_to_users()
+    public function it_can_send_a_notification_to_users(): void
     {
         $message = $this->notification->toPushNotification($this->notifiableUsers);
 
@@ -99,7 +99,7 @@ class ChannelTest extends MockeryTestCase
     }
 
     /** @test */
-    public function it_fires_failure_event_on_user_failure()
+    public function it_fires_failure_event_on_user_failure(): void
     {
         $message = $this->notification->toPushNotification($this->notifiableUser);
 
@@ -117,7 +117,7 @@ class TestNotifiableInterest
 {
     use Notifiable;
 
-    public function routeNotificationForPusherPushNotifications()
+    public function routeNotificationForPusherPushNotifications(): string
     {
         return 'interest_name';
     }
@@ -127,7 +127,7 @@ class TestNotifiableInterests
 {
     use Notifiable;
 
-    public function routeNotificationForPusherPushNotifications()
+    public function routeNotificationForPusherPushNotifications(): array
     {
         return ['interest_one', 'interest_two', 'interest_three'];
     }
@@ -137,9 +137,9 @@ class TestNotifiableUser
 {
     use Notifiable;
 
-    public $pushNotificationType = 'users';
+    public string $pushNotificationType = 'users';
 
-    public function routeNotificationForPusherPushNotifications()
+    public function routeNotificationForPusherPushNotifications(): string
     {
         return 'user_1';
     }
@@ -149,9 +149,9 @@ class TestNotifiableUsers
 {
     use Notifiable;
 
-    public $pushNotificationType = 'users';
+    public string $pushNotificationType = 'users';
 
-    public function routeNotificationForPusherPushNotifications()
+    public function routeNotificationForPusherPushNotifications(): array
     {
         return ['user_1', 'user_2', 'user_3'];
     }
@@ -159,7 +159,7 @@ class TestNotifiableUsers
 
 class TestNotification extends Notification
 {
-    public function toPushNotification($notifiable)
+    public function toPushNotification($notifiable): PusherMessage
     {
         return new PusherMessage();
     }

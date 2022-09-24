@@ -10,7 +10,7 @@ class PusherPushNotificationsServiceProvider extends ServiceProvider
     /**
      * Bootstrap the application services.
      */
-    public function boot()
+    public function boot(): void
     {
         $this->app->when(PusherChannel::class)
             ->needs(PushNotifications::class)

@@ -9,7 +9,7 @@ class Notifiable
     /**
      * @return int
      */
-    public function getKey()
+    public function getKey(): int
     {
         return 1;
     }

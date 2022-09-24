@@ -16,14 +16,8 @@ class PusherChannel
 {
     public const INTERESTS = 'interests';
 
-    protected PushNotifications $beamsClient;
-
-    private Dispatcher $events;
-
-    public function __construct(PushNotifications $beamsClient, Dispatcher $events)
+    public function __construct(protected PushNotifications $beamsClient, private Dispatcher $events)
     {
-        $this->beamsClient = $beamsClient;
-        $this->events = $events;
     }
 
     /**
@@ -49,7 +43,7 @@ class PusherChannel
             );
         } catch (Throwable $exception) {
             $this->events->dispatch(
-                new NotificationFailed($notifiable, $notification, 'pusher-push-notifications')
+                new NotificationFailed($notifiable, $notification, 'pusher-push-notifications', ['exception' => $exception])
             );
         }
     }
@@ -60,7 +54,7 @@ class PusherChannel
      * @param  mixed  $notifiable
      * @return string
      */
-    public static function defaultName($notifiable): string
+    public static function defaultName(mixed $notifiable): string
     {
         $class = str_replace('\\', '.', get_class($notifiable));
 
