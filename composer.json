@@ -33,10 +33,10 @@
     ],
     "require": {
         "php": ">=8.0",
-        "illuminate/events": "~8.0 || ~9.0",
-        "illuminate/notifications": "~8.0 || ~9.0",
-        "illuminate/queue": "~8.0 || ~9.0",
-        "illuminate/support": "~8.0 || ~9.0",
+        "illuminate/events": "~8.0 || ~9.0 || ^10.0",
+        "illuminate/notifications": "~8.0 || ~9.0 || ^10.0",
+        "illuminate/queue": "~8.0 || ~9.0 || ^10.0",
+        "illuminate/support": "~8.0 || ~9.0 || ^10.0",
         "pusher/pusher-push-notifications": "^2.0"
     },
     "require-dev": {
