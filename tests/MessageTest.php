@@ -73,6 +73,14 @@ class MessageTest extends MockeryTestCase
     }
 
     /** @test */
+    public function it_can_set_the_subtitle(): void
+    {
+        $this->message->subtitle('mySubTitle');
+
+        $this->assertEquals('mySubTitle', Arr::get($this->message->toiOS(), 'apns.aps.alert.subtitle'));
+    }
+
+    /** @test */
     public function it_can_set_the_body(): void
     {
         $this->message->body('myBody');
