@@ -97,6 +97,7 @@ class AccountApproved extends Notification
 - `web()`: Sets the platform value to web.
 - `link()`: Accepts a string value which will lead to URI specified on notification click.
 - `title('')`: Accepts a string value for the title.
+- `subtitle('')`: Accepts a string value for the subtitle (iOS).
 - `body('')`: Accepts a string value for the body.
 - `sound('')`: Accepts a string value for the notification sound file. Notice that if you leave blank the default sound value will be `default`.
 - `icon('')`: Accepts a string value for the icon file. (Android Only)
